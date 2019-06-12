@@ -10,6 +10,7 @@ def create_app():
     app.config.from_pyfile('config.py')
     #db.init_app(app)
     @app.route("/")
+    @app.route("/index/")
     def schedule():
         return 'schedule'
     return app

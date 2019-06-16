@@ -15,7 +15,7 @@ def create_app():
     @app.route("/")
     @app.route("/index/")
     def schedule():
-        return 'schedule'
+        return 'schedule2'
     return app
 
 

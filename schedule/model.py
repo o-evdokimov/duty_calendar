@@ -1,30 +1,40 @@
-from flask_sqlalchemy import SQLAlchemy 
+from flask_sqlalchemy import SQLAlchemy
 
-db = SQLAlchemy
+db = SQLAlchemy()
+ 
 
-class DutyEvent(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    event_type = db.Column(db.String, foreign_key=True, nullable=False)
-    duty_person_id = db.Column(db.Integer, unique=True, nullable=False)
-    datetime_start = db.Column(db.DateTime, nullable=False)
-    datetime_end = db.Column(db.DateTime, nullable=False)
 
-class DutyType(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    datetime_start = db.Column(db.DateTime, nullable=False)
-    datetime_end = db.Column(db.DateTime, nullable=False)
+class Timeinterval(db.Model):
+    id = db.Column(db.Integer, primary_key=True) 
+    time_start = db.Column(db.Time, nullable=False) 
+    time_end = db.Column(db.Time, nullable=False) 
 
-class DutyPerson(db.Model):
+class Role(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    active = db.Column(db.Boolean, nullable=False)
-    role_id = db.Column(db.Integer, foreign_key=True, nullable=False)
 
-class DutyRolesType(db.Model):
+class Person(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    role_id = db.Column(db.Integer, foreign_key=True, nullable=False)
+    name = db.Column(db.String, nullable=False, unique=True) 
+    active = db.Column(db.Boolean,nullable=False )
 
-class DutyRole(db.Model):
+class Dutytype(db.Model):
+
     id = db.Column(db.Integer, primary_key=True)
+    time_interval_id = db.Column(db.DateTime,db.ForeignKey('timeinterval.id'))
+    role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
     name = db.Column(db.String, nullable=False)
+
+
+
+class Roleperson(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
+    person_id = db.Column(db.Integer, db.ForeignKey('person.id'))
+
+class Dutyevent (db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    duty_type_id = db.Column(db.Integer, db.ForeignKey('dutytype.id'))
+    duty_person_id = db.Column(db.Integer, db.ForeignKey('person.id'))
+    date_time_start = db.Column(db.DateTime, nullable=False) 
+    date_time_stop = db.Column(db.DateTime, nullable=False)

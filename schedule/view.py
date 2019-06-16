@@ -6,5 +6,9 @@ from flask import render_template
 @app.route("/")
 def index():
    return render_template('base.html')
-   #return app
+
+@app.route("/calendar")
+def calendar():
+   return render_template('calendar.html')
+
 

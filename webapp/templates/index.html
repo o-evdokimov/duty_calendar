@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>{{ page_title }}</title>
+</head>
+<body>
+    <ul id="navigation">
+    {% for item in navigation %}
+        <li><a href="{{ index.html }}">{{ item.caption }}</a></li>
+    {% endfor %}
+    </ul>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col"> Имя </th>
+          <th scope="col"> Фамилия</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Валера</td>
+          <td>111</td>
+          
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Петя</td>
+          <td>222</td>
+          
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Витя</td>
+          <td>333</td>
+          
+        </tr>
+      </tbody>
+    </table>
+    {{ a_variable }}
+
+    {# a comment #}
+</body>
+</html>
+
+

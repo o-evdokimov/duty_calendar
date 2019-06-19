@@ -7,4 +7,8 @@ from flask import render_template
 def index():
    return render_template('index.html')
 
+@app.route("/smeny")
+def smeny():
+   return render_template('smeny.html')
+
 

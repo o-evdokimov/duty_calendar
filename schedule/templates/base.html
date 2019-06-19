@@ -10,6 +10,14 @@
     <title>{% block title %}{% endblock %} </title>
 </head>
 <body>
+    <ul class="nav nav-pills">
+            <li class="nav-item">
+              <a class="nav-link active" href="/">Календарь</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/smeny">Смены</a>
+            </li>
+    </ul>
     <div id="content">
         {% block content %}{% endblock %}
     </div>

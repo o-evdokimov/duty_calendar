@@ -10,14 +10,11 @@
     <title>{% block title %}{% endblock %} </title>
 </head>
 <body>
-    <ul class="nav nav-pills">
-            <li class="nav-item">
-              <a class="nav-link active" href="/">Календарь</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/smeny">Смены</a>
-            </li>
-    </ul>
+    <nav class="nav">
+        <a class="nav-link active" href="/">Календарь</a>
+        <a class="nav-link" href="/smeny">Смены</a>
+    </nav>
+    
     <div id="content">
         {% block content %}{% endblock %}
     </div>
@@ -26,8 +23,13 @@
            &copy; Learn Python by Moscow.Python 2019 <a href="https://learn.python.ru/"></a>
         {% endblock %}
     </div>    
-    <script src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='popper.min.js') }}" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='bootstrap.min.js') }}" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='popper.min.js') }}" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}" crossorigin="anonymous"></script>
+    <script>
+      $(function () {
+        $('#myTab li:last-child a').tab('show')
+      })
+    </script>
+  </body>
 </html>

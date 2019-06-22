@@ -1,5 +1,6 @@
 # my
 .vscode
+.vscode/
 .vscode/settings.json
 .DS_Store
 
@@ -107,3 +108,5 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+.vscode/settings.json
+.vscode/settings.json

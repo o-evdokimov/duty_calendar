@@ -1,7 +1,8 @@
 # my
 .vscode
-.vscode/settings.json
 .vscode/
+.vscode/settings.json
+.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

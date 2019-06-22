@@ -4,6 +4,10 @@ html {
   padding: 1rem;
 }
 
+.active {
+  background: #7573d4;
+}
+
 body {
   max-width: 960px;
   margin: 0 auto;

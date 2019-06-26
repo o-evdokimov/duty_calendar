@@ -17,6 +17,8 @@ class Person(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, unique=True) 
     active = db.Column(db.Boolean,nullable=False )
+    def __repr__(self):
+        return ("Person".format(self.name))
 
 class Dutytype(db.Model):
 

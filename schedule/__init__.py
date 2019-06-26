@@ -8,6 +8,8 @@ from schedule.forms import LoginForm
 from flask_login import LoginManager, login_user, logout_user, current_user
 
 
+last_page = 'index'
+
 def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('config.py')
@@ -33,8 +35,14 @@ def create_app():
 
     @app.route('/smeny')
     def smeny():
-        title = "Смены дежурств"
-        return render_template('smeny.html', title = title)
+        global last_page 
+        if current_user.is_authenticated:
+            title = "Смены дежурств"
+            return render_template('smeny.html', title = title)
+        else:
+            last_page = 'smeny'
+            flash('Log in for access', 'alert-info')
+            return redirect(url_for('login'))
 
     @app.route('/login')
     def login():
@@ -63,7 +71,7 @@ def create_app():
             if user and user.check_password(form.password.data):
                 login_user(user)
                 flash('You are logged in', 'alert-success')
-                return redirect(url_for('index'))
+                return redirect(url_for(last_page))
 
         flash('Username or Password are invalid', 'alert-danger')
         return redirect(url_for('login'))

@@ -10,17 +10,61 @@
     <title>{% block title %}{% endblock %} </title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">Messages</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" id="settings-tab" data-toggle="tab" href="{{ url_for('login') }}" aria-controls="settings" aria-selected="false">Settings</a>
+        </li>
+      </ul>
+      
+      <div class="tab-content">
+        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">...</div>
+        <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
+      </div>
+      
+    <!-- <nav class="navbar navbar-dark bg-dark"> -->
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light"> 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="/">Календарь <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="/smeny">Смены</a>
+            <li class="nav-item">
+            <a class="nav-item nav-link active" href="{{ url_for('index') }}">Календарь <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-item nav-link" href="{{ url_for('smeny') }}">Смены</a>
+            <li class="nav-item">
+            <p><a class="nav-item nav-link" <span style="padding-left: 600px;"> </a> </p>
+            </li>
+            <li class="nav-item">
+            <a class="nav-item nav-link" href="{{ url_for('login') }}">Log in</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-item nav-link" href="{{ url_for('logout') }}">Log out</a>
+            </li>
           </div>
         </div>
     </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+         <div class="alert {{ category }}" role="alert">
+             <li>{{ message }}</li>
+         </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
     <div id="content">
         {% block content %}{% endblock %}
     </div>

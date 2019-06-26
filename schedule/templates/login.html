@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock head %}
+{% block content %}
+    <div class="container">
+    <div class="row">
+        <div class="col-8">
+            <form action="{{ url_for('process_login') }}" method="POST">
+                {{ form.hidden_tag() }}
+                    <p>
+                        {{ form.login_name.label }} <br>
+                        {{ form.login_name() }}
+                    </p>
+                    <p>
+                        {{ form.password.label }} <br>
+                        {{ form.password() }}
+                    </p>
+                    <p>
+                        {{ form.submit() }}
+                    </p>
+                    
+            </form>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+    </div>
+    <script>
+        $(function () {
+            // $('#myTab li:last-child a').tab('show')
+             $('#someTab').tab('show')
+        )
+    </script>
+{% endblock content %}

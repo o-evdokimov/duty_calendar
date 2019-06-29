@@ -20,7 +20,8 @@ class Person(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), index = True, nullable=False, unique=True) 
     password = db.Column(db.String(128))
-    active = db.Column(db.Boolean, nullable=False )
+    active = db.Column(db.Boolean, nullable=False, default=True)
+    role = db.Column(db.String, nullable=False)
     def __repr__(self):
         return ("Person: {}".format(self.username))
     def __init__(self, username, password):

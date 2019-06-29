@@ -1,4 +1,6 @@
 # my
+*.db
+activate.sh
 .vscode
 .vscode/
 .vscode/settings.json

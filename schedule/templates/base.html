@@ -23,14 +23,18 @@
             <li class="nav-item">
             <a class="nav-item nav-link" href="{{ url_for('smeny') }}">Смены</a>
             <li class="nav-item">
-            <p><a class="nav-item nav-link" <span style="padding-left: 600px;"> </a> </p>
+              <p><a class="nav-item nav-link" <span style="padding-left: 600px;"> </a> </p>
             </li>
+            {% if not current_user.is_authenticated %}
             <li class="nav-item">
-            <a class="nav-item nav-link" href="{{ url_for('login') }}">Log in</a>
+              <a class="nav-item nav-link" href="{{ url_for('login') }}">Log in</a>
             </li>
+            {% else %}
             <li class="nav-item">
-            <a class="nav-item nav-link" href="{{ url_for('logout') }}">Log out</a>
+              Logged in as {{ current_user.username }}
+              <a class="nav-item nav-link" href="{{ url_for('logout') }}">Log out</a>
             </li>
+            {% endif %}
           </div>
         </div>
     </nav>

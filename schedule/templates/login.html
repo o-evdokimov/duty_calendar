@@ -10,7 +10,7 @@
     <div class="container">
     <div class="row">
         <div class="col-8">
-            <form action="{{ url_for('process_login') }}" method="POST">
+            <form action="{{ url_for('user.process_login') }}" method="POST">
                 {{ form.hidden_tag() }}
                     <p>
                         {{ form.login_name.label }} <br>

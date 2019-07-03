@@ -1,6 +1,7 @@
 from flask_login import login_user, logout_user, current_user
 from flask import Blueprint, render_template, flash, redirect, url_for
 
+
 from schedule.user.forms import LoginForm
 from schedule.user.models import Person
 
@@ -31,8 +32,8 @@ def process_login():
         user = Person.query.filter(Person.username == form.login_name.data).first()
         if user and user.check_password(form.password.data):
             login_user(user)
-            flash('You are logged in', 'alert-success')
-            return redirect(url_for('index'))
+            flash('You are logged in as '+user.username, 'alert-secondary')
+            return redirect(url_for('calendar.index'))
 
     flash('Username or Password are invalid', 'alert-danger')
     return redirect(url_for('user.login'))

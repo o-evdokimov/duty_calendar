@@ -18,23 +18,22 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <li class="nav-item">
-            <a class="nav-item nav-link active" href="{{ url_for('index') }}">Календарь <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" href="{{ url_for('calendar.index') }}">Календарь <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-            <a class="nav-item nav-link" href="{{ url_for('smeny') }}">Смены</a>
+            <a class="nav-item nav-link" href="{{ url_for('calendar.smeny') }}">Смены</a>
             <li class="nav-item">
-              <p><a class="nav-item nav-link" <span style="padding-left: 600px;"> </a> </p>
-            </li>
-            {% if not current_user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-item nav-link" href="{{ url_for('user.login') }}">Log in</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              Logged in as {{ current_user.username }}
-              <a class="nav-item nav-link" href="{{ url_for('user.logout') }}">Log out</a>
-            </li>
+              <p><a class="nav-item nav-link" <span style="padding-left: 685px;"> </span> </a> </p>
+              {% if not current_user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-item nav-link" href="{{ url_for('user.login') }}"> <span style="color:#377ba8;">Log in</span></a>
+              </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-item nav-link" href="{{ url_for('user.logout') }}">  <span style="color:#377ba8;">Log out</span></a>
+                </li>
             {% endif %}
+            </li>
           </div>
         </div>
     </nav>

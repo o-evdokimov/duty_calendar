@@ -1,9 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 #from schedule.user.models import Person 
 
+
 db = SQLAlchemy()
  
-
 class Timeinterval(db.Model):
     id = db.Column(db.Integer, primary_key=True) 
     time_start = db.Column(db.Time, nullable=False) 
@@ -18,7 +18,7 @@ class Role(db.Model):
 class Dutytype(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    time_interval_id = db.Column(db.DateTime,db.ForeignKey('timeinterval.id'))
+    time_interval_id = db.Column(db.Integer, db.ForeignKey('timeinterval.id'))
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
     def __repr__(self):
         return ("Dutytype: {}".format(self.name))

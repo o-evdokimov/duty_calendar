@@ -7,7 +7,17 @@
     </style>
 {% endblock head %}
 {% block content %}
-    <h1>Календарь</h1>
-    <p class="important">
-    </p>
+    <h1></h1>
+    <div class="card" style="width: 18rem;">
+            <img src={{ url_for('static', filename='noc.jpg') }} class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Today's Duty</h5>
+              <ul class="list-group">
+                    <li class="list-group-item">Duty #1 {{ duty1 }}</li>
+                    <li class="list-group-item">Duty #2 {{ duty2 }}</li>
+                    <li class="list-group-item">Duty Level Up {{ duty_level_up }}</li>
+                    <li class="list-group-item">Duty Security {{ duty_security }}</li>
+                  </ul>
+            </div>
+          </div>
 {% endblock content %}

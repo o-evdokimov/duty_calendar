@@ -34,8 +34,8 @@ def upgrade():
     )
     op.create_table('timeinterval',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('time_start', sa.Time(), nullable=False),
-    sa.Column('time_end', sa.Time(), nullable=False),
+    sa.Column('time_start', sa.DateTime(), nullable=False),
+    sa.Column('time_end', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('dutytype',

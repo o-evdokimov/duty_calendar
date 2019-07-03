@@ -25,6 +25,11 @@ def create_app():
     app.register_blueprint(user_blueprint)
     app.register_blueprint(calendar_blueprint)
 
+    @app.route('/')
+    def index():
+        title = "Рабочий календарь"
+        return render_template('index.html', title = title)
+
     @login_manager.user_loader
     def load_user(user_id):
         return Person.query.get(user_id)

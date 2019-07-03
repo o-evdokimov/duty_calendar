@@ -41,7 +41,7 @@ def upgrade():
     op.create_table('dutytype',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
-    sa.Column('time_interval_id', sa.DateTime(), nullable=True),
+    sa.Column('time_interval_id', sa.Integer(), nullable=True),
     sa.Column('role_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['role_id'], ['role.id'], ),
     sa.ForeignKeyConstraint(['time_interval_id'], ['timeinterval.id'], ),

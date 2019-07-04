@@ -1,5 +1,6 @@
 from flask_login import current_user
 from flask import Blueprint, render_template, flash, redirect, url_for
+from datetime import datetime
 
 
 from schedule.calendar.models import Dutytype
@@ -9,8 +10,8 @@ blueprint = Blueprint('calendar', __name__, url_prefix='/calendar')
 @blueprint.route('/')
 def index():
     title = "Рабочий календарь"
-    print(Dutytype.query.get("evd"))
-    return render_template('index.html', title = title)
+    current_date = datetime.today().strftime('%d-%m-%Y')
+    return render_template('index.html', title = title, date=current_date)
 
 @blueprint.route('/smeny')
 def smeny():

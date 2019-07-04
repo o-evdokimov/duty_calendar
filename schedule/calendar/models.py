@@ -43,5 +43,6 @@ class Dutyevent(db.Model):
     duty_person_id = db.Column(db.Integer, db.ForeignKey('person.id'))
     date_time_start = db.Column(db.DateTime, nullable=False) 
     date_time_stop = db.Column(db.DateTime, nullable=False)
+    table_date = db.Column(db.DateTime, nullable=False)
     def __repr__(self):
         return ("Duty event: {}".format(self.id))

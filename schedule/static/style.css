@@ -36,6 +36,10 @@ nav {
   padding: 0 0.5rem;
 }
 
+aligncenter {
+  text-align: center;
+}
+
 nav h1 {
   flex: auto;
   margin: 0;

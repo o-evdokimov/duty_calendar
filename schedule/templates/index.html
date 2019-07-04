@@ -11,12 +11,16 @@
     <div class="card" style="width: 18rem;">
             <img src={{ url_for('static', filename='noc.jpg') }} class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Today's Duty</h5>
-              <ul class="list-group">
-                    <li class="list-group-item">Duty #1 {{ duty1 }}</li>
-                    <li class="list-group-item">Duty #2 {{ duty2 }}</li>
-                    <li class="list-group-item">Duty Level Up {{ duty_level_up }}</li>
-                    <li class="list-group-item">Duty Security {{ duty_security }}</li>
+                <h5 class="card-title"> {{ date }} </h5> 
+                <ul class="list-group">
+                    <button type="button" class="btn btn-primary">Duty #1</button>
+                    <button type="button" class="btn btn-warning">Duty #2</button>
+                    <button type="button" class="btn btn-success">Level Up</button>
+                    <button type="button" class="btn btn-secondary">Security</button>
+                    <!-- <li class="list-group-item">Duty #1 {{ duty1 }}</li> -->
+                    <!-- <li class="list-group-item">Duty #2 {{ duty2 }}</li> -->
+                    <!-- <li class="list-group-item">Level Up {{ duty_level_up }}</li> -->
+                    <!-- <li class="list-group-item">Security {{ duty_security }}</li> -->
                   </ul>
             </div>
           </div>

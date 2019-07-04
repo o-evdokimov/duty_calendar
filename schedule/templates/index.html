@@ -7,11 +7,10 @@
     </style>
 {% endblock head %}
 {% block content %}
-    <h1></h1>
-    <div class="card" style="width: 18rem;">
-            <img src={{ url_for('static', filename='noc.jpg') }} class="card-img-top" alt="...">
+    <h5></h5>
+    <div class="card" style="width: 16rem; left: 12px;">
             <div class="card-body">
-                <h5 class="card-title"> {{ date }} </h5> 
+                <h3 class="card-title"> <span style="padding-left: 40px;"> </span> {{ date }} </h3> 
                 <ul class="list-group">
                     <button type="button" class="btn btn-primary">Duty #1</button>
                     <button type="button" class="btn btn-warning">Duty #2</button>
@@ -21,7 +20,7 @@
                     <!-- <li class="list-group-item">Duty #2 {{ duty2 }}</li> -->
                     <!-- <li class="list-group-item">Level Up {{ duty_level_up }}</li> -->
                     <!-- <li class="list-group-item">Security {{ duty_security }}</li> -->
-                  </ul>
+                </ul>
             </div>
-          </div>
+     </div>
 {% endblock content %}

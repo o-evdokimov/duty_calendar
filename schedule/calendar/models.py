@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 #from schedule.user.models import Person 
 
 
@@ -43,6 +44,6 @@ class Dutyevent(db.Model):
     duty_person_id = db.Column(db.Integer, db.ForeignKey('person.id'))
     date_time_start = db.Column(db.DateTime, nullable=False) 
     date_time_stop = db.Column(db.DateTime, nullable=False)
-    table_date = db.Column(db.DateTime, nullable=False)
+    table_date = db.Column(db.DateTime, default = datetime.today().strftime('%d-%m-%Y'), nullable=True)
     def __repr__(self):
         return ("Duty event: {}".format(self.id))

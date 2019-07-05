@@ -17,7 +17,13 @@ def index():
 def smeny():
     if current_user.is_authenticated:
         title = "Смены дежурств"
-        return render_template('smeny.html', title = title)
+        dutytypes = Dutytype.query.all()
+        colors = ('btn btn-primary', 'btn btn-warning', 'btn btn-success', 'btn btn-secondary')
+        new_dict = dict(zip(colors, dutytypes))
+
+        print(new_dict)
+
+        return render_template('smeny.html', title = title, dutytypes = dutytypes, new_dict = new_dict)
     else:
         flash('Log in for access', 'alert-info')
         return redirect(url_for('user.login'))

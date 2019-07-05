@@ -26,7 +26,7 @@ class Dutytype(db.Model):
     time_interval_id = db.Column(db.Integer, db.ForeignKey('timeinterval.id'))
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
     def __repr__(self):
-        return ("Dutytype: {}".format(self.name))
+        return ("{}".format(self.name))
     def __init__(self, *args, **kwargs):
         super(Dutytype,self).__init__(*args, **kwargs)
 

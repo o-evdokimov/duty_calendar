@@ -4,19 +4,31 @@
     {{ super() }}
     <style type="text/css">
         .important { color: #336699; }
+        /* .equalDivide tr td { width:25%; } */
     </style>
 {% endblock head %}
 {% block content %}
     <p class="important">
     <h5></h5>
-    <div class="card" style="width: 16rem; left: 12px;">
-            <div class="card-body">
-                <ul class="list-group">
-                    {% for color,duty in new_dict.items() %}
-                            <button type="button" class ="{{ color }}"> {{ duty }} </button>
+    <div class="container">
+            <table class="table-bordered">
+              <thead>
+                <tr>
+                  <th>Duty type</th>
+                  <th>Time Interval</th>
+                  <th>Role</th>
+                </tr>
+              </thead>
+                    {% for n in range(4) %}
+                    <tbody> 
+                        <tr class={{ color_row[n] }} >
+                            <td><button type="button" class ="btn btn-primary btn-block {{ color_btn[n] }}"> {{ shift[n] }} </button></td>
+                            <td>{{ time_interval[n] }}</td>
+                            <td> {{ role[n] }}</td>
+                        </tr>
+                    </tbody>
                     {% endfor %}
-                </ul>
-            </div>
-     </div>
+            </table>
+          </div>      
      </p>
 {% endblock content %}

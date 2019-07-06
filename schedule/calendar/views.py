@@ -18,12 +18,23 @@ def smeny():
     if current_user.is_authenticated:
         title = "Смены дежурств"
         dutytypes = Dutytype.query.all()
-        colors = ('btn btn-primary', 'btn btn-warning', 'btn btn-success', 'btn btn-secondary')
-        new_dict = dict(zip(colors, dutytypes))
+        len_dt = len(dutytypes) 
+        shift = []
+        time_interval = []
+        role = []
+        n=0
+        for n in range(len_dt):
+            dutytype = str(dutytypes[n]).split('_')
+            shift.append(dutytype[0])
+            time_interval.append(int(dutytype[1]))
+            role.append(dutytype[2])
+        color_btn = ['btn btn-primary', 'btn btn-warning', 'btn btn-success', 'btn btn-secondary']
+        color_row = ['table-info', 'table-warning', 'table-success', 'table-active']
+        #new_dict = dict(zip(colors, dutytypes))
 
-        print(new_dict)
+        #print(new_dict)
 
-        return render_template('smeny.html', title = title, dutytypes = dutytypes, new_dict = new_dict)
+        return render_template('smeny.html', color_btn = color_btn, color_row = color_row, title = title, shift=shift, time_interval=time_interval, role=role)
     else:
         flash('Log in for access', 'alert-info')
         return redirect(url_for('user.login'))

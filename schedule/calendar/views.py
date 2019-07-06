@@ -29,7 +29,7 @@ def smeny():
             time_interval.append(int(dutytype[1]))
             role.append(dutytype[2])
         color_btn = ['btn btn-primary', 'btn btn-warning', 'btn btn-success', 'btn btn-secondary']
-        color_row = ['table-info', 'table-warning', 'table-success', 'table-active']
+        color_row = ['info', 'warning', 'success', 'active']
         #new_dict = dict(zip(colors, dutytypes))
 
         #print(new_dict)

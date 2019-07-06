@@ -19,15 +19,15 @@
                   <th>Role</th>
                 </tr>
               </thead>
-                    {% for n in range(4) %}
-                    <tbody> 
-                        <tr class={{ color_row[n] }} >
-                            <td><button type="button" class ="btn btn-primary btn-block {{ color_btn[n] }}"> {{ shift[n] }} </button></td>
-                            <td>{{ time_interval[n] }}</td>
-                            <td> {{ role[n] }}</td>
-                        </tr>
-                    </tbody>
-                    {% endfor %}
+              <tbody>
+                {% for n in range(4) %}
+                    <tr class="table-{{ color_row[n] }}" >
+                        <td><button type="button" class ="btn btn-primary btn-block {{ color_btn[n] }}"> {{ shift[n] }} </button></td>
+                        <td>{{ time_interval[n] }}</td>
+                        <td> {{ role[n] }}</td>
+                    </tr>
+                {% endfor %}
+              </tbody>
             </table>
           </div>      
      </p>

@@ -13,6 +13,8 @@ class Timeinterval(db.Model):
     def __init__(self, time_start, time_end):
         self.time_start = time_start
         self.time_end = time_end
+    def __repr__(self):
+        return ("{}_{}".format(str(self.time_start),str(self.time_end)))
 
 class Role(db.Model):
     id = db.Column(db.Integer, primary_key=True)

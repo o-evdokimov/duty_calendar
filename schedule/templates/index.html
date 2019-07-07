@@ -2,21 +2,66 @@
 {% block title %}{{ title }}{% endblock %}
 {% block head %}
     {{ super() }}
-    <style type="text/css">
-        .important { color: #539933; }
-    </style>
+    <!-- <style type="text/css">  -->
+        <!-- .important { color: #181a17; }  -->
+    <!-- </style>  -->
 {% endblock head %}
 {% block content %}
-    <h5></h5>
-    <div class="card" style="width: 16rem; left: 12px;">
-            <div class="card-body">
-                <h3 class="card-title"> <span style="padding-left: 42px;"> </span> {{ date }} </h3> 
-                <ul class="list-group">
-                    <button type="button" class="btn btn-primary">Duty #1</button>
-                    <button type="button" class="btn btn-warning">Duty #2</button>
-                    <button type="button" class="btn btn-success">Level Up</button>
-                    <button type="button" class="btn btn-secondary">Security</button>
-                </ul>
-            </div>
-     </div>
+    <h5 class=text-center> {{ mydate.strftime('%B') }} </h5>
+    <div class="row">
+    <div class="col-my">
+            <table class>
+              <thead>
+                <tr>
+                  <th class=text-center> {{ mydate.strftime('%a') }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for n in range(itslen) %}
+                    <tr class="table-{{ color_row[n] }}">
+                        <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ color_btn[n] }}"> 
+                            {{ (persons[n].username | replace('[', '') | replace(']','')) | capitalize | truncate(16)}} 
+                        </button></td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+    </div>
+    <div class="col-my">
+            <table class>    
+              <thead>
+                    <tr>
+                      <th class=text-center> {{ mydate.strftime('%a') }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for n in range(itslen) %}
+                        <tr class="table-{{ color_row[n] }}" >
+                            <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ color_btn[n] }}"> 
+                                {{ (persons[n].username | replace('[', '') | replace(']','')) | capitalize | truncate(16)}} 
+                            </button></td>
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+            </table>
+          </div>  
+          <div class="col-my">
+                <table class>    
+                  <thead>
+                        <tr>
+                          <th class=text-center> {{ mydate.strftime('%a') }}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for n in range(itslen) %}
+                            <tr class="table-{{ color_row[n] }}" >
+                                <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ color_btn[n] }}"> 
+                                    {{ (persons[n].username | replace('[', '') | replace(']','')) | capitalize | truncate(16)}} 
+                                </button></td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                </table>
+              </div>  
+    </div>
 {% endblock content %}

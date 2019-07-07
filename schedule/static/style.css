@@ -140,3 +140,8 @@ input[type=submit] {
   align-self: start;
   min-width: 10em;
 }
+.parent {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+}

@@ -16,15 +16,13 @@
                 <tr>
                   <th>Duty type</th>
                   <th>Time Interval</th>
-                  <th>Role</th>
                 </tr>
               </thead>
               <tbody>
                 {% for n in range(4) %}
                     <tr class="table-{{ color_row[n] }}" >
-                        <td><button type="button" class ="btn btn-primary btn-block {{ color_btn[n] }}"> {{ shift[n] }} </button></td>
-                        <td>{{ time_interval[n] }}</td>
-                        <td> {{ role[n] }}</td>
+                        <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ color_btn[n] }}"> {{ (timeintervals[n].duty_type | replace('[', '') | replace(']','')) }} </button></td>
+                        <td> {{ timeintervals[n].time_start.strftime('%H:%M') }} - {{timeintervals[n].time_end.strftime('%H:%M')}}</td>
                     </tr>
                 {% endfor %}
               </tbody>

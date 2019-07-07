@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, flash, redirect, url_for
 from datetime import datetime
 
 
-from schedule.calendar.models import Dutytype
+from schedule.calendar.models import Dutytype, Timeinterval
 
 blueprint = Blueprint('calendar', __name__, url_prefix='/calendar')
 
@@ -17,24 +17,13 @@ def index():
 def smeny():
     if current_user.is_authenticated:
         title = "Смены дежурств"
-        dutytypes = Dutytype.query.all()
-        len_dt = len(dutytypes) 
-        shift = []
-        time_interval = []
-        role = []
-        n=0
-        for n in range(len_dt):
-            dutytype = str(dutytypes[n]).split('_')
-            shift.append(dutytype[0])
-            time_interval.append(int(dutytype[1]))
-            role.append(dutytype[2])
-        color_btn = ['btn btn-primary', 'btn btn-warning', 'btn btn-success', 'btn btn-secondary']
+        timeintervals = Timeinterval.query.all()
+        color_btn = ['primary', 'warning', 'success', 'secondary']
         color_row = ['info', 'warning', 'success', 'active']
         #new_dict = dict(zip(colors, dutytypes))
-
         #print(new_dict)
-
-        return render_template('smeny.html', color_btn = color_btn, color_row = color_row, title = title, shift=shift, time_interval=time_interval, role=role)
+        print(timeintervals)
+        return render_template('smeny.html', timeintervals = timeintervals, color_btn = color_btn, color_row = color_row, title = title)
     else:
         flash('Log in for access', 'alert-info')
         return redirect(url_for('user.login'))

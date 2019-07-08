@@ -7,52 +7,19 @@
     <!-- </style>  -->
 {% endblock head %}
 {% block content %}
-    <h5 class=text-center> {{ mydate.strftime('%B') }} </h5>
-    <div class="row">
-    <div class="col-my">
-            <table class>
-              <thead>
-                <tr>
-                  <th class=text-center> {{ mydate.strftime('%a') }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for n in range(itslen) %}
-                    <tr class="table-{{ color_row[n] }}">
-                        <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ color_btn[n] }}"> 
-                            {{ (persons[n].username | replace('[', '') | replace(']','')) | capitalize | truncate(16)}} 
-                        </button></td>
-                    </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-    </div>
-    <div class="col-my">
-            <table class>    
-              <thead>
-                    <tr>
-                      <th class=text-center> {{ mydate.strftime('%a') }}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for n in range(itslen) %}
-                        <tr class="table-{{ color_row[n] }}" >
-                            <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ color_btn[n] }}"> 
-                                {{ (persons[n].username | replace('[', '') | replace(']','')) | capitalize | truncate(16)}} 
-                            </button></td>
-                        </tr>
-                    {% endfor %}
-                  </tbody>
-            </table>
-          </div>  
-          <div class="col-my">
+    {% set WEEKDAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'] %}
+    {% set num_row = 7 %}
+    <h1 class=text-left> {{ mydate.strftime('%B') }} </h1>
+
+    {% for week in range(days//num_row) %}
+      <div class="row-my">
+        {% for day in range(num_row) %}
+        <div class="col-my">
                 <table class>    
-                  <thead>
-                        <tr>
-                          <th class=text-center> {{ mydate.strftime('%a') }}</th>
-                        </tr>
-                      </thead>
-                      <tbody>
+                    <thead>
+                        <tr> <th class=text-center> {{ week*num_row+day+1 }}-{{ WEEKDAYS[day] }} </th></tr>
+                    </thead>
+                    <tbody>
                         {% for n in range(itslen) %}
                             <tr class="table-{{ color_row[n] }}" >
                                 <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ color_btn[n] }}"> 
@@ -60,8 +27,31 @@
                                 </button></td>
                             </tr>
                         {% endfor %}
-                      </tbody>
+                    </tbody>
                 </table>
-              </div>  
-    </div>
+                <br>
+         </div>   
+        {% endfor %}
+    {% endfor %}
+    {% set week = days//num_row %}
+    {% for day in range(days - ((days//num_row)*num_row)) %}
+    <div class="col-my">
+            <table class>    
+                <thead>
+                    <tr> <th class=text-center> {{ week*num_row+day+1 }}-{{ WEEKDAYS[day] }} </th> </tr>
+                </thead>
+                <tbody>
+                    {% for n in range(itslen) %}
+                        <tr class="table-{{ color_row[n] }}" >
+                            <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ color_btn[n] }}"> 
+                                {{ (persons[n].username | replace('[', '') | replace(']','')) | capitalize | truncate(16)}} 
+                            </button></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+        </div>   
+    {% endfor %}
+  </div>
 {% endblock content %}

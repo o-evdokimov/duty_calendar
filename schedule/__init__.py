@@ -28,7 +28,7 @@ def create_app():
     @app.route('/')
     def index():
         title = "Рабочий календарь"
-        return render_template('index.html', title = title)
+        return redirect(url_for('calendar.index')) 
 
     @login_manager.user_loader
     def load_user(user_id):

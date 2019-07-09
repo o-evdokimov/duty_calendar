@@ -5,7 +5,7 @@ html {
 }
 
 .active {
-  background: #7573d4;
+  color: #7573d4;
 }
 
 body {
@@ -16,7 +16,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: serif;
-  color: #d2e09e;
+  color: #343a40;
   margin: 1rem 0;
 }
 
@@ -34,6 +34,10 @@ nav {
   display: flex;
   align-items: center;
   padding: 0 0.5rem;
+}
+
+aligncenter {
+  text-align: center;
 }
 
 nav h1 {
@@ -135,4 +139,9 @@ input.danger {
 input[type=submit] {
   align-self: start;
   min-width: 10em;
+}
+.parent {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
 }

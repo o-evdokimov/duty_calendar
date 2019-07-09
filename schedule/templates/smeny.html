@@ -1,16 +1,32 @@
 {% extends "base.html" %}
-{% block title %}Working Calendar{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 {% block head %}
     {{ super() }}
     <style type="text/css">
         .important { color: #336699; }
+        /* .equalDivide tr td { width:25%; } */
     </style>
 {% endblock head %}
 {% block content %}
     <p class="important">
-        <br>  Дежурный основной #1.  03:00 - 15:00 
-        <br>  Дежурный основной #2.  15:00 - 03:00 
-        <br>  Дежурный LevelUP.      11:00 - 11:00 
-        <br>  Дежурный security.     10:00 - 19:00  <br>
-    </p>
+    <h5></h5>
+    <div class="container">
+            <table class="table-striped">
+              <thead>
+                <tr>
+                  <th>Duty type</th>
+                  <th>Time Interval</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for n in range(itslen) %}
+                    <tr class="table-{{ color_row[n] }}" >
+                        <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ color_btn[n] }}"> {{ (timeintervals[n].duty_type | replace('[', '') | replace(']','')) }} </button></td>
+                        <td> {{ timeintervals[n].time_start.strftime('%H:%M') }} - {{timeintervals[n].time_end.strftime('%H:%M')}}</td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>      
+     </p>
 {% endblock content %}

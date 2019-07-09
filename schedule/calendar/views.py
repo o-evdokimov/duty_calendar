@@ -21,7 +21,7 @@ def index():
     month = int(mydate.strftime('%m'))+1
     year = int(mydate.strftime('%Y'))
     days = monthrange(year,month)[1]
-    first_day = days = monthrange(year,month)[0]
+    first_day = monthrange(year,month)[0]
     print('len=',type(itslen))
     return render_template('index.html', title = title, persons = persons, mydate=mydate, color_btn = color_btn, color_row = color_row, itslen = itslen, days = days, first_day = first_day)
 

@@ -19,8 +19,8 @@ def index():
     dutytype_number = len(Dutytype.query.all())
     month = int(mydate.strftime('%m'))
     year = int(mydate.strftime('%Y'))
-    month = 4
-    year=2021
+    #month = 4
+    #year=2021
     first_day = monthrange(year,month)[0]
     mcal = cal.monthdays2calendar(year,month)
     return render_template('index.html', title = title, mcal = mcal, persons = persons, mydate=mydate, dutytype_number = dutytype_number, first_day = first_day)

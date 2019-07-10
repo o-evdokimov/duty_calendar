@@ -20,8 +20,10 @@ def index():
     cal = calendar.Calendar()
     persons = Person.query.all()
     itslen = len(Dutytype.query.all())
-    month = int(mydate.strftime('%m'))+1
+    month = int(mydate.strftime('%m'))
     year = int(mydate.strftime('%Y'))
+    month = 2
+    year=2021
     days = monthrange(year,month)[1]
     first_day = monthrange(year,month)[0]
     mcal = cal.monthdays2calendar(year,month)

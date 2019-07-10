@@ -8,79 +8,18 @@
 {% endblock head %}
 {% block content %}
     {% set WEEKDAYS = {0:'Monday',1:'Tuesday',2:'Wednesday',3:'Thursday',4:'Friday',5:'Saturday',6:'Sunday'} %}
-    {% set num_row = 7 %}
-    <h1 class=text-left> {{first_day}} {{ mydate.strftime('%B') }} </h1>
-    {% set correct_day = first_day %}
-    {% set empty_str = "-----------" %}
-    {% for week in range(days//num_row) %}
-    {% if week > 0 %}
-        {% set first_day = 0 %}
-    {% set weekday=0 %}
-    {% endif %}
+    {% set ROWS = mcal|length %}
+    {% set CELS = 7 %}
 
-      <div class="row-my">
-      {% for day in range(first_day) %}
-            {% set weekday = day+first_day %}
+    <h1 class=text-left> {{ mydate.strftime('%B') }} </h1>
+    <h1 class=text-left> {{ rows }} </h1>
 
-            <div class="col-my">
-                    <table class>    
-                        <thead>
-                            <tr> <th class=text-center> empty </th></tr>
-                        </thead>
-                        <tbody>
-                            {% for n in range(itslen) %}
-                                <tr class="table-{{ color_row[n] }}" >
-                                    <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ color_btn[n] }}"> 
-                                        {{ empty_str }}
-                                    </button></td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    <br>
-            </div>   
-        {% endfor %}          
-        {% for day in range(num_row - first_day) %}
-            {% set weekday = day+first_day %}
+    {% for week in range(ROWS) %}
 
-            <div class="col-my">
-                    <table class>    
-                        <thead>
-                            <tr> <th class=text-center> {{ week*num_row+day+1+first_day-correct_day }}-{{ WEEKDAYS[weekday] }} </th></tr>
-                        </thead>
-                        <tbody>
-                            {% for n in range(itslen) %}
-                                <tr class="table-{{ color_row[n] }}" >
-                                    <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ color_btn[n] }}"> 
-                                        {{ (persons[n].username | replace('[', '') | replace(']','')) | capitalize | truncate(16)}} 
-                                    </button></td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    <br>
-            </div>   
-        {% endfor %}
-    {% endfor %}
-    {% set week = days//num_row %}
-    {% for day in range(days - ((days//num_row)*num_row)) %}
-    <div class="col-my">
-            <table class>    
-                <thead>
-                    <tr> <th class=text-center> {{ week*num_row+day+1 }}-{{ WEEKDAYS[day] }} </th> </tr>
-                </thead>
-                <tbody>
-                    {% for n in range(itslen) %}
-                        <tr class="table-{{ color_row[n] }}" >
-                            <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ color_btn[n] }}"> 
-                                {{ (persons[n].username | replace('[', '') | replace(']','')) | capitalize | truncate(16)}} 
-                            </button></td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <br>
-        </div>   
-    {% endfor %}
-  </div>
+        {% for day in range(CELS) %}
+            {{ mcal[day] }}
+        {% endfor %} 
+
+    {% endfor %} 
+
 {% endblock content %}

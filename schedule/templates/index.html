@@ -9,16 +9,13 @@
 {% endblock head %}
 {% block content %}
     {% set WEEKDAYS = {0:'Monday',1:'Tuesday',2:'Wednesday',3:'Thursday',4:'Friday',5:'Saturday',6:'Sunday'} %}
-    {% set COLOR_BTN = ['primary', 'warning', 'success', 'secondary'] %}
-    {% set COLOR_ROW = ['info', 'warning', 'success', 'active'] %}
     {% set ROWS = mcal|length %}
     {% set CELS = 7 %}
     {% set ROW_RIGHT = (130*first_day)|string + "px" %}
     {% set ROW_LEFT = "0px" %}
 
-    <h1 class=text-left> {{ mydate.strftime('%B') }} </h1>
-    <h1 class=text-left> {{ g_pos }} </h1>
-
+    <h1 class=text-left> {{ mydate.strftime('%B') }} {{ mydate.strftime('%Y') }} </h1>
+    </br>
     {% for week in range(ROWS) %}
     {% if week==0 %} 
         {% set row_style=ROW_RIGHT %}

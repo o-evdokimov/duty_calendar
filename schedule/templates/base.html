@@ -9,7 +9,9 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <title>{% block title %}{% endblock %} </title>
 </head>
-<body>       
+<body>      
+    {% set COLOR_BTN = ['primary', 'warning', 'success', 'secondary'] %}
+    {% set COLOR_ROW = ['info', 'warning', 'success', 'active'] %} 
     <!-- <nav class="navbar navbar-dark bg-dark"> -->
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light"> 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

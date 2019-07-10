@@ -20,8 +20,8 @@
               </thead>
               <tbody>
                 {% for n in range(itslen) %}
-                    <tr class="table-{{ color_row[n] }}" >
-                        <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ color_btn[n] }}"> {{ (timeintervals[n].duty_type | replace('[', '') | replace(']','')) }} </button></td>
+                    <tr class="table-{{ COLOR_ROW[n] }}" >
+                        <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ COLOR_BTN[n] }}"> {{ (timeintervals[n].duty_type | replace('[', '') | replace(']','')) }} </button></td>
                         <td> {{ timeintervals[n].time_start.strftime('%H:%M') }} - {{timeintervals[n].time_end.strftime('%H:%M')}}</td>
                     </tr>
                 {% endfor %}

@@ -2,24 +2,52 @@
 {% block title %}{{ title }}{% endblock %}
 {% block head %}
     {{ super() }}
-    <!-- <style type="text/css">  -->
-        <!-- .important { color: #181a17; }  -->
-    <!-- </style>  -->
+    <style type="text/css">  
+        .important { color: #181a17; }  
+        /* p {} */
+    </style>  
 {% endblock head %}
 {% block content %}
     {% set WEEKDAYS = {0:'Monday',1:'Tuesday',2:'Wednesday',3:'Thursday',4:'Friday',5:'Saturday',6:'Sunday'} %}
+    {% set COLOR_BTN = ['primary', 'warning', 'success', 'secondary'] %}
+    {% set COLOR_ROW = ['info', 'warning', 'success', 'active'] %}
     {% set ROWS = mcal|length %}
     {% set CELS = 7 %}
+    {% set ROW_RIGHT = (130*first_day)|string + "px" %}
+    {% set ROW_LEFT = "0px" %}
 
     <h1 class=text-left> {{ mydate.strftime('%B') }} </h1>
-    <h1 class=text-left> {{ rows }} </h1>
+    <h1 class=text-left> {{ g_pos }} </h1>
 
     {% for week in range(ROWS) %}
-
+    {% if week==0 %} 
+        {% set row_style=ROW_RIGHT %}
+    {% else %}
+        {% set row_style=ROW_LEFT %}
+    {% endif %}
+    <div class="row-my" style = "padding-left: {{ row_style }};">
         {% for day in range(CELS) %}
-            {{ mcal[day] }}
+            {% if mcal[week][day][0] != 0 %} 
+                <div class="col-my">
+                    <table class>    
+                        <thead>
+                            <tr> <th class=text-center> {{ mcal[week][day][0] }}-{{ WEEKDAYS[mcal[week][day][1]] }} </th></tr>
+                        </thead>
+                        <tbody>
+                            {% for n in range(dutytype_number) %}
+                                <tr class="table-{{ COLOR_ROW[n] }}" >
+                                    <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ COLOR_BTN[n] }}"> 
+                                        {{ (persons[n].username | replace('[', '') | replace(']','')) | capitalize | truncate(16)}} 
+                                    </button></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <br>
+                </div> 
+            {% endif %}
         {% endfor %} 
-
+    </div>
     {% endfor %} 
 
 {% endblock content %}

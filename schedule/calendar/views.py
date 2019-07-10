@@ -10,25 +10,20 @@ from schedule.user.models import Person
 
 blueprint = Blueprint('calendar', __name__, url_prefix='/calendar')
 
-color_btn = ['primary', 'warning', 'success', 'secondary']
-color_row = ['info', 'warning', 'success', 'active']
-
 @blueprint.route('/')
 def index():
     title = "Расписание"
     mydate = datetime.today()
     cal = calendar.Calendar()
     persons = Person.query.all()
-    itslen = len(Dutytype.query.all())
+    dutytype_number = len(Dutytype.query.all())
     month = int(mydate.strftime('%m'))
     year = int(mydate.strftime('%Y'))
-    month = 2
+    month = 4
     year=2021
-    days = monthrange(year,month)[1]
     first_day = monthrange(year,month)[0]
     mcal = cal.monthdays2calendar(year,month)
-    print('len=',type(itslen))
-    return render_template('index.html', title = title, mcal = mcal, persons = persons, mydate=mydate, color_btn = color_btn, color_row = color_row, itslen = itslen, days = days, first_day = first_day)
+    return render_template('index.html', title = title, mcal = mcal, persons = persons, mydate=mydate, dutytype_number = dutytype_number, first_day = first_day)
 
 @blueprint.route('/smeny')
 def smeny():
@@ -39,7 +34,7 @@ def smeny():
         #new_dict = dict(zip(colors, dutytypes))
         #print(new_dict)
         print('len=',type(itslen))
-        return render_template('smeny.html', title = title, timeintervals = timeintervals, color_btn = color_btn, color_row = color_row, itslen = itslen)
+        return render_template('smeny.html', title = title, timeintervals = timeintervals, itslen = itslen)
     else:
         flash('Log in for access', 'alert-info')
         return redirect(url_for('user.login'))

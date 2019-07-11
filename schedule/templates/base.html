@@ -7,6 +7,31 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.css') }}">
     <!-- Custom styles CSS -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='popper.min.js') }}" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}" crossorigin="anonymous"></script>
+    <script>
+      $(function () {
+        $('#myTab li:last-child a').tab('show')
+      })
+
+    $(function() {
+      var btn = $("[href='#collapseExample']");
+      var toggled = false;
+      btn.on("click", function() {
+          if(!toggled)
+          {
+            toggled = true;
+            btn.text("Read less");
+          } else {
+            toggled = false;
+            btn.text("Read more");
+          }
+      });
+    });
+    </script>
+
     <title>{% block title %}{% endblock %} </title>
 </head>
 <body>      
@@ -57,13 +82,5 @@
            &copy; Learn Python by Moscow.Python 2019 <a href="https://learn.python.ru/"></a>
         {% endblock %}
     </div>    
-    <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='popper.min.js') }}" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}" crossorigin="anonymous"></script>
-    <script>
-      $(function () {
-        $('#myTab li:last-child a').tab('show')
-      })
-    </script>
   </body>
 </html>

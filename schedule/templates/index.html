@@ -33,9 +33,16 @@
                         <tbody>
                             {% for n in range(dutytype_number) %}
                                 <tr class="table-{{ COLOR_ROW[n] }}" >
-                                    <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ COLOR_BTN[n] }}"> 
+                                    <td>
+                                        <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class ="btn btn-primary btn-block text-left btn-{{ COLOR_BTN[n] }}"> 
                                         {{ (persons[n].username | replace('[', '') | replace(']','')) | capitalize | truncate(16)}} 
-                                    </button></td>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            {% for n in range(4) %}
+                                                <a class="dropdown-item" href="#collapseExample"> {{ persons[n].username}}</a>
+                                            {% endfor %} 
+                                          </div>
+                                </td>
                                 </tr>
                             {% endfor %}
                         </tbody>

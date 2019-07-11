@@ -114,3 +114,4 @@ venv.bak/
 /sqlite3.exe
 /sqlite3_analyzer.exe
 /schedule.old.db
+/info

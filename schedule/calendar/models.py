@@ -15,13 +15,14 @@ class Timeinterval(db.Model):
         self.time_start = time_start
         self.time_end = time_end
     def __repr__(self):
-        return ("{}-{} >> {}".format(datetime.strftime(self.time_start,"%H:%M"),datetime.strftime(self.time_end,"%H:%M"),self.duty_type))
+        return ("{}-{} >> {}".format(datetime.strftime(self.time_start,"%H:%M"), datetime.strftime(self.time_end,"%H:%M"), self.duty_type))
 
 class Role(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
+    duty_type = db.relationship('Dutytype', backref='role', lazy=True)
     def __repr__(self):
-        return ("Role: {}".format(self.name))
+        return ("Role: {}".format(self.name), self.duty_type)
 
 class Dutytype(db.Model):
     id = db.Column(db.Integer, primary_key=True)

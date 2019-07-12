@@ -12,17 +12,22 @@
     <h5></h5>
     <div class="container">
             <table class="table-striped">
-              <thead>
-                <tr>
-                  <th>Duty type</th>
-                  <th>Time Interval</th>
-                </tr>
-              </thead>
+              <!-- <thead> -->
+                <!-- <tr> -->
+                  <!-- <th>Duty type</th> -->
+                  <!-- <th>Time Interval</th> -->
+                <!-- </tr> -->
+              <!-- </thead> -->
               <tbody>
                 {% for n in range(itslen) %}
                     <tr class="table-{{ COLOR_ROW[n] }}" >
-                        <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ COLOR_BTN[n] }}"> {{ (timeintervals[n].duty_type | replace('[', '') | replace(']','')) }} </button></td>
-                        <td> {{ timeintervals[n].time_start.strftime('%H:%M') }} - {{timeintervals[n].time_end.strftime('%H:%M')}}</td>
+                      <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ COLOR_BTN[n] }}"> 
+                            {{ (timeintervals[n].duty_type | replace('[', '') | replace(']','')) }} 
+                          </button>
+                      </td>
+                      <td> 
+                            {{ timeintervals[n].time_start.strftime('%H:%M') }} - {{timeintervals[n].time_end.strftime('%H:%M')}}
+                      </td>
                     </tr>
                 {% endfor %}
               </tbody>

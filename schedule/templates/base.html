@@ -11,23 +11,17 @@
     <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='popper.min.js') }}" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='dd2b335778.js') }}"></script>
     <script>
       $(function () {
         $('#myTab li:last-child a').tab('show')
       })
-
+    </script>
+    <script>
     $(function() {
       var btn = $("[href='#collapseExample']");
-      var toggled = false;
       btn.on("click", function() {
-          if(!toggled)
-          {
-            toggled = true;
-            btn.text("Read less");
-          } else {
-            toggled = false;
-            btn.text("Read more");
-          }
+            btn.text("...");
       });
     });
     </script>
@@ -45,12 +39,15 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <li class="nav-item">
-            <a class="nav-item nav-link active" href="{{ url_for('calendar.index', year_=2019, month_=1) }}">Расписание <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" 
+              href="{{ url_for('calendar.index_default') }}">
+                Расписание <span class="sr-only">(current)</span>
+            </a>
             </li>
             <li class="nav-item">
-            <a class="nav-item nav-link" href="{{ url_for('calendar.smeny') }}">Смены</a>
+            <a class="nav-item nav-link" href="{{ url_for('calendar.smeny') }}">Типы дежурств</a>
             <li class="nav-item">
-              <p><a class="nav-item nav-link" <span style="padding-left: 680px;"> </span> </a> </p>
+              <p><a class="nav-item nav-link" <span style="padding-left: 600px;"> </span> </a> </p>
               {% if not current_user.is_authenticated %}
               <li class="nav-item">
                 <a class="nav-item nav-link" href="{{ url_for('user.login') }}"> <span style="color:#377ba8;">Log in</span></a>

@@ -13,9 +13,17 @@
     {% set CELS = 7 %}
     {% set ROW_RIGHT = (130*first_day)|string + "px" %}
     {% set ROW_LEFT = "0px" %}
-
-    <h1 class=text-left> {{ mydate.strftime('%B') }} {{ mydate.strftime('%Y') }} </h1>
-    </br>
+    {% set YEAR = mydate.strftime('%Y') %}
+    {% set MONTH = mydate.strftime('%m') %}
+    {% set MONTH_NAME = mydate.strftime('%B') %}
+    <h1 class=text-center> 
+            {{ MONTH_NAME }} {{ YEAR }} 
+    </h1>
+    <h1>
+        <a href="{{ url_for('calendar.index',year_=YEAR,month_=MONTH|int - 1) }}" class="far fa-arrow-alt-circle-left"></a>
+        <a href="{{ url_for('calendar.index',year_=YEAR,month_=MONTH|int + 1) }}" class="far fa-arrow-alt-circle-right"></a>
+    </h1>
+    <!-- </br> -->
     {% for week in range(ROWS) %}
     {% if week==0 %} 
         {% set row_style=ROW_RIGHT %}
@@ -35,11 +43,11 @@
                                 <tr class="table-{{ COLOR_ROW[n] }}" >
                                     <td>
                                         <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class ="btn btn-primary btn-block text-left btn-{{ COLOR_BTN[n] }}"> 
-                                        {{ (persons[n].username | replace('[', '') | replace(']','')) | capitalize | truncate(16)}} 
+                                            {{ (persons[n].username | replace('[', '') | replace(']','')) | capitalize | truncate(16)}} 
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             {% for n in range(4) %}
-                                                <a class="dropdown-item" href="#collapseExample"> {{ persons[n].username}}</a>
+                                                <a class="dropdown-item" href="{{ url_for('calendar.smeny') }}"> {{ persons[n].username}}</a>
                                             {% endfor %} 
                                           </div>
                                 </td>

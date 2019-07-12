@@ -13,6 +13,13 @@ blueprint = Blueprint('calendar', __name__, url_prefix='/calendar')
 def InitCalendar(mcal, persons, dutytypes):
     pass
 
+@blueprint.route('/')
+def index_default():
+    current_date = datetime.today()
+    year = int(current_date.strftime('%Y'))
+    month = int(current_date.strftime('%m'))
+    return redirect(url_for('calendar.index',year_=year,month_=month))
+
 @blueprint.route('/<int:year_>/<int:month_>')
 def index(year_,month_):
     title = "Расписание"
@@ -25,6 +32,14 @@ def index(year_,month_):
     #year = int(mydate.strftime('%Y'))
     year = year_
     month = month_
+    if (month==0): 
+        month=12
+        year-=1
+        return redirect(url_for('calendar.index',year_=year,month_=month)) 
+    if (month==13): 
+        month=1
+        year+=1
+        return redirect(url_for('calendar.index',year_=year,month_=month)) 
     mydate = datetime.strptime('{},{}'.format(year,month), '%Y,%m')
     #year=2021
     first_day = monthrange(year,month)[0]

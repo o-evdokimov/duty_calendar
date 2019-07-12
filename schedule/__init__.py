@@ -2,6 +2,7 @@ from flask import Flask, render_template, flash, redirect, url_for
 from flask_login import LoginManager, login_user, logout_user, current_user
 from flask.views import MethodView
 from flask_migrate import Migrate
+from datetime import datetime
 
 
 from schedule.user.models import Person
@@ -28,7 +29,10 @@ def create_app():
     @app.route('/')
     def index():
         title = "Рабочий календарь"
-        return redirect(url_for('calendar.index')) 
+        current_date = datetime.today()
+        year = int(current_date.strftime('%Y'))
+        month = int(current_date.strftime('%m'))
+        return redirect(url_for('calendar.index',year_=year,month_=month)) 
 
     @login_manager.user_loader
     def load_user(user_id):

@@ -5,10 +5,13 @@ from calendar import monthrange
 import calendar
 
 
-from schedule.calendar.models import Dutytype, Timeinterval
+from schedule.calendar.models import Dutytype, Dutyevent, Timeinterval
 from schedule.user.models import Person
 
 blueprint = Blueprint('calendar', __name__, url_prefix='/calendar')
+
+def InitCalendar(mcal, persons, dutytypes):
+    pass
 
 @blueprint.route('/')
 def index():
@@ -16,6 +19,7 @@ def index():
     mydate = datetime.today()
     cal = calendar.Calendar()
     persons = Person.query.all()
+    dutytypes = Dutytype.query.all()
     dutytype_number = len(Dutytype.query.all())
     month = int(mydate.strftime('%m'))
     year = int(mydate.strftime('%Y'))
@@ -23,6 +27,7 @@ def index():
     #year=2021
     first_day = monthrange(year,month)[0]
     mcal = cal.monthdays2calendar(year,month)
+    InitCalendar(mcal,persons,dutytypes)
     return render_template('index.html', title = title, mcal = mcal, persons = persons, mydate=mydate, dutytype_number = dutytype_number, first_day = first_day)
 
 @blueprint.route('/smeny')

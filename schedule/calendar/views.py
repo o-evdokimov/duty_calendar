@@ -13,17 +13,19 @@ blueprint = Blueprint('calendar', __name__, url_prefix='/calendar')
 def InitCalendar(mcal, persons, dutytypes):
     pass
 
-@blueprint.route('/')
-def index():
+@blueprint.route('/<int:year_>/<int:month_>')
+def index(year_,month_):
     title = "Расписание"
-    mydate = datetime.today()
+    current_date = datetime.today()
     cal = calendar.Calendar()
     persons = Person.query.all()
     dutytypes = Dutytype.query.all()
     dutytype_number = len(Dutytype.query.all())
-    month = int(mydate.strftime('%m'))
-    year = int(mydate.strftime('%Y'))
-    #month = 4
+    #month = int(mydate.strftime('%m'))
+    #year = int(mydate.strftime('%Y'))
+    year = year_
+    month = month_
+    mydate = datetime.strptime('{},{}'.format(year,month), '%Y,%m')
     #year=2021
     first_day = monthrange(year,month)[0]
     mcal = cal.monthdays2calendar(year,month)

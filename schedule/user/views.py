@@ -33,7 +33,7 @@ def process_login():
         if user and user.check_password(form.password.data):
             login_user(user)
             flash('You are logged in as '+user.username, 'alert-secondary')
-            return redirect(url_for('calendar.index'))
+            return redirect(url_for('calendar.index',year_=2019,month_=1))
 
     flash('Username or Password are invalid', 'alert-danger')
     return redirect(url_for('user.login'))

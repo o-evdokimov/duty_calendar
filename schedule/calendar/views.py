@@ -32,11 +32,11 @@ def index(year_,month_):
     #year = int(mydate.strftime('%Y'))
     year = year_
     month = month_
-    if (month==0): 
+    if (month < 1): 
         month=12
         year-=1
         return redirect(url_for('calendar.index',year_=year,month_=month)) 
-    if (month==13): 
+    if (month > 12): 
         month=1
         year+=1
         return redirect(url_for('calendar.index',year_=year,month_=month)) 

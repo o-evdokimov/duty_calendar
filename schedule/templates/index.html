@@ -1,11 +1,7 @@
 {% extends "base.html" %}
 {% block title %}{{ title }}{% endblock %}
 {% block head %}
-    {{ super() }}
-    <style type="text/css">  
-        .important { color: #181a17; }  
-        /* p {} */
-    </style>  
+    {{ super() }}  
 {% endblock head %}
 {% block content %}
     {% set WEEKDAYS = {0:'Monday',1:'Tuesday',2:'Wednesday',3:'Thursday',4:'Friday',5:'Saturday',6:'Sunday'} %}
@@ -30,6 +26,7 @@
     {% else %}
         {% set row_style=ROW_LEFT %}
     {% endif %}
+    <div class=”container”>
     <div class="row-my" style = "padding-left: {{ row_style }};">
         {% for day in range(CELS) %}
             {% if mcal[week][day][0] != 0 %} 
@@ -44,13 +41,13 @@
                                     <td>
                                         <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class ="btn btn-primary btn-block text-left btn-{{ COLOR_BTN[n] }}"> 
                                             {{ (persons[n].username | replace('[', '') | replace(']','')) | capitalize | truncate(16)}} 
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             {% for n in range(4) %}
                                                 <a class="dropdown-item" href="{{ url_for('calendar.smeny') }}"> {{ persons[n].username}}</a>
                                             {% endfor %} 
-                                          </div>
-                                </td>
+                                        </div>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -59,6 +56,7 @@
                 </div> 
             {% endif %}
         {% endfor %} 
+    </div>
     </div>
     {% endfor %} 
 

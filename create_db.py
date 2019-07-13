@@ -1,3 +1,3 @@
-from schedule import db, create_app
+from schedule.calendar.models import db, create_app
 
 db.create_all(app=create_app())

@@ -52,6 +52,17 @@ class Dutyevent(db.Model):
     duty_person_id = db.Column(db.Integer, db.ForeignKey('person.id'))
     date_time_start = db.Column(db.DateTime, nullable=False) 
     date_time_stop = db.Column(db.DateTime, nullable=False)
-    table_date = db.Column(db.DateTime, default = datetime.today().strftime('%d-%m-%Y'), unique=True, nullable=False)
+    date_ym = db.Column(db.String, nullable=False) 
+    date_ymd = db.Column(db.String, nullable=False)
+    table_date = db.Column(db.DateTime, default = datetime.today().strftime('%Y-%m-%d'), unique=True, nullable=False)
     def __repr__(self):
         return ("Duty event: {}".format(self.id))
+    @property
+    def create_ym(self):
+        return (self.table_date.strftime('%Y-%m')).strftime('%Y-%m')
+    @property
+    def create_ymd(self):
+        return (self.table_date.strftime('%Y-%m-%d')).strftime('%Y-%m-%d')
+    def __init__(self, date_ym, date_ymd):
+        self.date_ym = create_ym()
+        self.date_ymd = create_ymd()

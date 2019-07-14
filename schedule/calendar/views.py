@@ -45,7 +45,21 @@ def index(year_,month_):
     first_day = monthrange(year,month)[0]
     mcal = cal.monthdays2calendar(year,month)
     InitCalendar(mcal,persons,dutytypes)
-    return render_template('index.html', title = title, mcal = mcal, persons = persons, mydate=mydate, dutytype_number = dutytype_number, first_day = first_day)
+
+    duty_events_month = list()
+    de_month = Dutyevent.query.filter_by(table_date = datetime.strptime('{}-{}-14'.format(year,month),'%Y-%m-%d'))
+    de = de_month[0]
+    de14 = Dutyevent.query.filter_by(table_date = datetime.strptime('{}-{}-14'.format(year,month),'%Y-%m-%d'))
+    pe14 = Person.query.filter_by(id=de14[0].duty_person_id) 
+
+    for day in range(31):
+        print(day)
+        duty_events_month.append(pe14[0].username)
+
+
+
+
+    return render_template('index.html', title = title, mcal = mcal, persons = persons, duty_events_month = duty_events_month, mydate=mydate, dutytype_number = dutytype_number, first_day = first_day)
 
 @blueprint.route('/smeny')
 def smeny():

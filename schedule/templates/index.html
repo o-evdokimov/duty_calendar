@@ -40,7 +40,8 @@
                                 <tr class="table-{{ COLOR_ROW[n] }}" >
                                     <td>
                                         <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class ="btn btn-primary btn-block text-left btn-{{ COLOR_BTN[n] }}"> 
-                                            {{ (persons[n].username | replace('[', '') | replace(']','')) | capitalize }} 
+                                            <!-- {{ (persons[n].username | replace('[', '') | replace(']','')) | capitalize }} -->
+                                            {{ duty_events_month[day] }}
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             {% for n in range(4) %}

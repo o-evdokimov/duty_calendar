@@ -47,19 +47,17 @@ def index(year_,month_):
     InitCalendar(mcal,persons,dutytypes)
 
     duty_events_month = list()
-    de_month = Dutyevent.query.filter_by(table_date = datetime.strptime('{}-{}-14'.format(year,month),'%Y-%m-%d'))
+    month_date = (datetime.strptime('{}-{}'.format(year,month),'%Y-%m')).strftime('%Y-%m')
+    de_month = Dutyevent.query.filter_by(date_ym = month_date)
     de = de_month[0]
-    de14 = Dutyevent.query.filter_by(table_date = datetime.strptime('{}-{}-14'.format(year,month),'%Y-%m-%d'))
-    pe14 = Person.query.filter_by(id=de14[0].duty_person_id) 
+    pe14 = Person.query.filter_by(id=de.duty_person_id) 
 
     for day in range(31):
-        print(day)
+        #print(pe14[0].username)
         duty_events_month.append(pe14[0].username)
+        #print(duty_events_month[day])
 
-
-
-
-    return render_template('index.html', title = title, mcal = mcal, persons = persons, duty_events_month = duty_events_month, mydate=mydate, dutytype_number = dutytype_number, first_day = first_day)
+    return render_template('index.html', title = title, mcal = mcal, duty_events_month = duty_events_month, persons = persons, mydate=mydate, dutytype_number = dutytype_number, first_day = first_day)
 
 @blueprint.route('/smeny')
 def smeny():

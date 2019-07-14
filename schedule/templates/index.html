@@ -19,7 +19,22 @@
         <a href="{{ url_for('calendar.index',year_=YEAR,month_=MONTH|int - 1) }}" class="far fa-arrow-alt-circle-left"></a>
         <a href="{{ url_for('calendar.index',year_=YEAR,month_=MONTH|int + 1) }}" class="far fa-arrow-alt-circle-right"></a>
     </h1>
-    <!-- </br> -->
+    
+    {% set row_style='20px'%}
+    <div class=”container”>
+            <div class="row-my" style = "padding-left: {{ row_style }};">
+                {% for day in range(7) %}
+                        <div class="col-my">
+                            <table class>    
+                                <thead>
+                                    <tr> <th> {{ WEEKDAYS[day] }}  </th></tr>
+                                </thead>
+                            </table>
+                        </div>
+                {% endfor %} 
+            </div>
+    </div>
+    </br> 
     {% for week in range(ROWS) %}
     {% if week==0 %} 
         {% set row_style=ROW_RIGHT %}
@@ -33,19 +48,18 @@
                 <div class="col-my">
                     <table class>    
                         <thead>
-                            <tr> <th class=text-center> {{ mcal[week][day][0] }}-{{ WEEKDAYS[mcal[week][day][1]] }} </th></tr>
+                            <tr> <th class=text-center> {{ mcal[week][day][0] }} </th></tr>
                         </thead>
                         <tbody>
                             {% for n in range(dutytype_number) %}
                                 <tr class="table-{{ COLOR_ROW[n] }}" >
                                     <td>
                                         <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class ="btn btn-primary btn-block text-left btn-{{ COLOR_BTN[n] }}"> 
-                                            <!-- {{ (persons[n].username | replace('[', '') | replace(']','')) | capitalize }} -->
-                                            {{ duty_events_month[day] }}
+                                            {{ duty_events_month[0] }}
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             {% for n in range(4) %}
-                                                <a class="dropdown-item" href="{{ url_for('calendar.index',year_=YEAR,month_=n) }}"> {{ persons[n].username}}</a>
+                                                <a class="dropdown-item" href="{{ url_for('calendar.index',year_=YEAR,month_=n) }}"></a>
                                             {% endfor %} 
                                         </div>
                                     </td>

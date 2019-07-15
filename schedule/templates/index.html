@@ -5,7 +5,7 @@
 {% endblock head %}
 {% block content %}
     {% set WEEKDAYS = {0:'Monday',1:'Tuesday',2:'Wednesday',3:'Thursday',4:'Friday',5:'Saturday',6:'Sunday'} %}
-    {% set ROWS = mcal|length %}
+    {% set ROWS = week_numbers %}
     {% set CELS = 7 %}
     {% set ROW_RIGHT = (130*first_day+15)|string + "px" %}
     {% set ROW_LEFT = "15px" %}
@@ -17,8 +17,8 @@
             {{ MONTH_NAME }} {{ YEAR }} 
     </h1>
     <h1 class=text-center>
-        <a href="{{ url_for('calendar.index',year_=YEAR,month_=MONTH|int - 1) }}" class="far fa-arrow-alt-circle-left"></a>
-        <a href="{{ url_for('calendar.index',year_=YEAR,month_=MONTH|int + 1) }}" class="far fa-arrow-alt-circle-right"></a>
+        <a href="{{ url_for('calendar.index',year=YEAR,month=MONTH|int - 1) }}" class="far fa-arrow-alt-circle-left"></a>
+        <a href="{{ url_for('calendar.index',year=YEAR,month=MONTH|int + 1) }}" class="far fa-arrow-alt-circle-right"></a>
     </h1>
     </br> 
     <div class=”container”>
@@ -53,7 +53,7 @@
                         </thead>
                         <tbody>
                             {% set duty_persons = (de_day[day_of_month])|get_duty_person(day_of_month) %}
-                            {% for n in range(4) %}
+                            {% for n in range(dutytype_number-1) %}
                                 <tr class="table-{{ COLOR_ROW[n] }}" >
                                     <td>
                                         <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class ="btn btn-primary btn-block text-left btn-{{ COLOR_BTN[n] }}"> 
@@ -61,7 +61,7 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             {% for n in range(4) %}
-                                                <a class="dropdown-item" href="{{ url_for('calendar.index',year_=YEAR,month_=n) }}"></a>
+                                                <a class="dropdown-item" href="{{ url_for('calendar.index',year=YEAR,month=n) }}"></a>
                                             {% endfor %} 
                                         </div>
                                     </td>

@@ -21,34 +21,30 @@ def EmptyDay(day_date):
 
 @blueprint.route('/')
 def index_default():
-    current_date = datetime.today()
-    year = int(current_date.strftime('%Y'))
-    month = int(current_date.strftime('%m'))
-    return redirect(url_for('calendar.index',year_=year,month_=month))
+    year = int(datetime.today().strftime('%Y'))
+    month = int(datetime.today().strftime('%m'))
+    return redirect(url_for('calendar.index',year=year,month=month))
 
-@blueprint.route('/<int:year_>/<int:month_>')
-def index(year_,month_):
+@blueprint.route('/<int:year>/<int:month>')
+def index(year,month):
     title = "Расписание"
-    current_date = datetime.today()
-    cal = calendar.Calendar()
-    persons = Person.query.all()
+    #persons = Person.query.all()
     dutytypes = Dutytype.query.all()
     dutytype_number = len(dutytypes)
-    year = year_
-    month = month_
     if (month < 1): 
         month=12
         year-=1
-        return redirect(url_for('calendar.index',year_=year,month_=month)) 
+        return redirect(url_for('calendar.index',year=year,month=month)) 
     if (month > 12): 
         month=1
         year+=1
-        return redirect(url_for('calendar.index',year_=year,month_=month)) 
+        return redirect(url_for('calendar.index',year=year,month=month)) 
     mydate = datetime.strptime('{},{}'.format(year,month), '%Y,%m')
-    #year=2021
     first_day = monthrange(year,month)[0]
+    cal = calendar.Calendar()
     mcal = cal.monthdays2calendar(year,month)
-    InitCalendar(mcal,persons,dutytypes)
+    week_numbers = len(mcal)
+    #InitCalendar(mcal,persons,dutytypes)
 
     de_day = dict()
     for x in cal.itermonthdays2(year,month):
@@ -57,9 +53,9 @@ def index(year_,month_):
         day_date = (datetime.strptime('{}-{}-{}'.format(year,month,str(day)),'%Y-%m-%d')).strftime('%Y-%m-%d')
         #day_date = '2019-07-14'
         de_day[day] = Dutyevent.query.filter_by(date_ymd = day_date)
-        if not de_day[day].all(): de_day[day] = EmptyDay(day_date)
+        #if not de_day[day].all(): de_day[day] = EmptyDay(day_date)
 
-    return render_template('index.html', title = title, mcal = mcal, de_day = de_day, persons = persons, mydate=mydate, dutytype_number = dutytype_number, first_day = first_day)
+    return render_template('index.html', title = title, week_numbers=week_numbers, mcal = mcal, de_day = de_day, mydate=mydate, dutytype_number = dutytype_number, first_day = first_day)
 
 @blueprint.route('/smeny')
 def smeny():

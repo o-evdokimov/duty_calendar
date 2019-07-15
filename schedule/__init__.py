@@ -31,7 +31,7 @@ def create_app():
         current_date = datetime.today()
         year = int(current_date.strftime('%Y'))
         month = int(current_date.strftime('%m'))
-        return redirect(url_for('calendar.index',year_=year,month_=month)) 
+        return redirect(url_for('calendar.index',year=year,month=month)) 
 
     @login_manager.user_loader
     def load_user(user_id):

@@ -44,11 +44,11 @@ def create_app():
 
     @app.template_filter('get_duty_person')
     def get_duty_person(duty_event,n):
-        print ('n=',n)
+        #print ('n=',n)
         duty_persons = list()
         if not duty_event: 
-            duty_persons = ['_is_empty_','_is_empty_','_is_empty_','_is_empty_']
-            return duty_persons[n]
+            duty_persons =  '_is_empty_'
+            return duty_persons
         for event in range(len(duty_event.all())):
                 duty_persons.append((Person.query.filter_by(id=duty_event[event].duty_person_id))[0].username)
 

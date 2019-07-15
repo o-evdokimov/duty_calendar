@@ -13,8 +13,9 @@ blueprint = Blueprint('calendar', __name__, url_prefix='/calendar')
 def InitCalendar(mcal, persons, dutytypes):
     pass
 
-def EmptyDay():
-    #de = Dutyevent()
+def EmptyDay(day_date):
+    #table_date = datetime.strptime(day_date, '%Y-%m-%d')
+    #de = Dutyevent(table_date=table_date)
     #return de
     pass
 
@@ -50,13 +51,13 @@ def index(year_,month_):
     InitCalendar(mcal,persons,dutytypes)
 
     de_day = dict()
-    for x in cal.itermonthdays2(2019,7):
+    for x in cal.itermonthdays2(year,month):
         if not x[0]: continue
         day = x[0]
         day_date = (datetime.strptime('{}-{}-{}'.format(year,month,str(day)),'%Y-%m-%d')).strftime('%Y-%m-%d')
         #day_date = '2019-07-14'
         de_day[day] = Dutyevent.query.filter_by(date_ymd = day_date)
-        if not de_day[day].all(): de_day[day] = EmptyDay()
+        if not de_day[day].all(): de_day[day] = EmptyDay(day_date)
 
     return render_template('index.html', title = title, mcal = mcal, de_day = de_day, persons = persons, mydate=mydate, dutytype_number = dutytype_number, first_day = first_day)
 

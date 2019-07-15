@@ -57,12 +57,13 @@ class Dutyevent(db.Model):
     table_date = db.Column(db.DateTime, default = datetime.today().strftime('%Y-%m-%d'), unique=False, nullable=False)
     def __repr__(self):
         return ("Duty event: {}".format(self.id))
-    @property
+    # @property
     def create_ym(self):
-        return (self.table_date.strftime('%Y-%m')).strftime('%Y-%m')
-    @property
+        return self.table_date.strftime('%Y-%m')
+    # @property
     def create_ymd(self):
-        return (self.table_date.strftime('%Y-%m-%d')).strftime('%Y-%m-%d')
-    #def __init__(self):
-        #self.date_ym = create_ym()
-        #self.date_ymd = create_ymd()
+        return self.table_date.strftime('%Y-%m-%d')
+    def __init__(self,table_date=table_date):
+        self.table_date = table_date
+        self.date_ym = self.create_ym()
+        self.date_ymd = self.create_ymd()

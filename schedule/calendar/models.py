@@ -48,13 +48,13 @@ class Roleperson(db.Model):
 
 class Dutyevent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    duty_type_id = db.Column(db.Integer, db.ForeignKey('dutytype.id'))
-    duty_person_id = db.Column(db.Integer, db.ForeignKey('person.id'))
-    date_time_start = db.Column(db.DateTime, nullable=False) 
-    date_time_stop = db.Column(db.DateTime, nullable=False)
-    date_ym = db.Column(db.String, nullable=False) 
-    date_ymd = db.Column(db.String, nullable=False)
-    table_date = db.Column(db.DateTime, default = datetime.today().strftime('%Y-%m-%d'), unique=True, nullable=False)
+    duty_type_id = db.Column(db.Integer, db.ForeignKey('dutytype.id'), default=1000)
+    duty_person_id = db.Column(db.Integer, db.ForeignKey('person.id'), default=1000)
+    date_time_start = db.Column(db.DateTime, default = datetime.today().strftime('%Y-%m-%d'), nullable=False) 
+    date_time_stop = db.Column(db.DateTime, default = datetime.today().strftime('%Y-%m-%d'), nullable=False)
+    date_ym = db.Column(db.String, default = datetime.today().strftime('%Y-%m'), nullable=False) 
+    date_ymd = db.Column(db.String, default = datetime.today().strftime('%Y-%m-%d'), nullable=False)
+    table_date = db.Column(db.DateTime, default = datetime.today().strftime('%Y-%m-%d'), unique=False, nullable=False)
     def __repr__(self):
         return ("Duty event: {}".format(self.id))
     @property
@@ -63,6 +63,6 @@ class Dutyevent(db.Model):
     @property
     def create_ymd(self):
         return (self.table_date.strftime('%Y-%m-%d')).strftime('%Y-%m-%d')
-    def __init__(self, date_ym, date_ymd):
-        self.date_ym = create_ym()
-        self.date_ymd = create_ymd()
+    #def __init__(self):
+        #self.date_ym = create_ym()
+        #self.date_ymd = create_ymd()

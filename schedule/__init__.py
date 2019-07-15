@@ -41,5 +41,22 @@ def create_app():
     def make_shell_context():
         return {'db':db, 'Person':Person, 'Role':Role, 'Dutytype':Dutytype, 'Timeinterval':Timeinterval, 'Roleperson':Roleperson}
 
+
+    @app.template_filter('get_duty_person')
+    def get_duty_person(duty_event,n):
+        print ('n=',n)
+        duty_persons = list()
+        if not duty_event: 
+            duty_persons = ['_is_empty_','_is_empty_','_is_empty_','_is_empty_']
+            return duty_persons[n]
+        for event in range(len(duty_event.all())):
+                duty_persons.append((Person.query.filter_by(id=duty_event[event].duty_person_id))[0].username)
+
+        #print (duty_persons)
+        try:
+            return duty_persons[n]
+        except IndexError:
+            return '_is_empty_'
+
     return app
 

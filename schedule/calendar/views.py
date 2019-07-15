@@ -8,16 +8,17 @@ import calendar
 from schedule.calendar.models import Dutytype, Dutyevent, Timeinterval
 from schedule.user.models import Person
 
+
 blueprint = Blueprint('calendar', __name__, url_prefix='/calendar')
 
-def InitCalendar(mcal, persons, dutytypes):
-    pass
+#def InitCalendar(mcal, persons, dutytypes):
+#    pass
 
-def EmptyDay(day_date):
+#def EmptyDay(day_date):
     #table_date = datetime.strptime(day_date, '%Y-%m-%d')
     #de = Dutyevent(table_date=table_date)
     #return de
-    pass
+
 
 @blueprint.route('/')
 def index_default():
@@ -28,7 +29,6 @@ def index_default():
 @blueprint.route('/<int:year>/<int:month>')
 def index(year,month):
     title = "Расписание"
-    #persons = Person.query.all()
     dutytypes = Dutytype.query.all()
     dutytype_number = len(dutytypes)
     if (month < 1): 
@@ -46,6 +46,8 @@ def index(year,month):
     week_numbers = len(mcal)
     #InitCalendar(mcal,persons,dutytypes)
 
+    # получаем словарь с dutyevents и отдаём его в calendar.index
+    # ключ = день, значение = список объектов класса Dutyevent
     de_day = dict()
     for x in cal.itermonthdays2(year,month):
         if not x[0]: continue
@@ -70,8 +72,10 @@ def smeny():
         return redirect(url_for('user.login'))
 
 
+# получаем словарь (dict) с persons, номер ячейки соответствует dutytype_id
+# данный template используем в calendar.index
 @blueprint.app_template_filter('get_duty_person')
-def get_duty_person(duty_event, dom):
+def get_duty_person(duty_event):
     dutytypes = Dutytype.query.all()
     dt_len = len(dutytypes)
     duty_persons_empty = dict()
@@ -82,7 +86,6 @@ def get_duty_person(duty_event, dom):
         return duty_persons_empty
     for event in range(len(duty_event.all())):
             dt_id = duty_event[event].duty_type_id
-            print('de={},--{}'.format(duty_event[event],dom))
             duty_persons[dt_id-1] = (Person.query.filter_by(id=duty_event[event].duty_person_id))[0].username
             
     try:

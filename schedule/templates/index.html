@@ -52,7 +52,7 @@
                             <tr> <th class=text-center> {{ day_of_month }} </th></tr>
                         </thead>
                         <tbody>
-                            {% set duty_persons = (de_day[day_of_month])|get_duty_person(day_of_month) %}
+                            {% set duty_persons = (de_day[day_of_month])|get_duty_person %}
                             {% for n in range(dutytype_number-1) %}
                                 <tr class="table-{{ COLOR_ROW[n] }}" >
                                     <td>

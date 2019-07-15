@@ -12,15 +12,15 @@
     {% set YEAR = mydate.strftime('%Y') %}
     {% set MONTH = mydate.strftime('%m') %}
     {% set MONTH_NAME = mydate.strftime('%B') %}
+    {% set row_style='35px'%}
     <h1 class=text-center> 
             {{ MONTH_NAME }} {{ YEAR }} 
     </h1>
-    <h1>
+    <h1 class=text-center>
         <a href="{{ url_for('calendar.index',year_=YEAR,month_=MONTH|int - 1) }}" class="far fa-arrow-alt-circle-left"></a>
         <a href="{{ url_for('calendar.index',year_=YEAR,month_=MONTH|int + 1) }}" class="far fa-arrow-alt-circle-right"></a>
     </h1>
     </br> 
-    {% set row_style='35px'%}
     <div class=”container”>
             <div class="row-my" style = "padding-left: {{ row_style }};">
                 {% for day in range(7) %}
@@ -52,11 +52,12 @@
                             <tr> <th class=text-center> {{ day_of_month }} </th></tr>
                         </thead>
                         <tbody>
+                            {% set duty_persons = (de_day[day_of_month])|get_duty_person(day_of_month) %}
                             {% for n in range(4) %}
                                 <tr class="table-{{ COLOR_ROW[n] }}" >
                                     <td>
                                         <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class ="btn btn-primary btn-block text-left btn-{{ COLOR_BTN[n] }}"> 
-                                            {{ de_day[day_of_month]|get_duty_person(n)|capitalize }} 
+                                            {{ (duty_persons[n])|capitalize }} 
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             {% for n in range(4) %}

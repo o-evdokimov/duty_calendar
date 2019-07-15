@@ -33,7 +33,7 @@ def index(year_,month_):
     cal = calendar.Calendar()
     persons = Person.query.all()
     dutytypes = Dutytype.query.all()
-    dutytype_number = len(Dutytype.query.all())
+    dutytype_number = len(dutytypes)
     year = year_
     month = month_
     if (month < 1): 
@@ -73,3 +73,23 @@ def smeny():
         flash('Log in for access', 'alert-info')
         return redirect(url_for('user.login'))
 
+
+@blueprint.app_template_filter('get_duty_person')
+def get_duty_person(duty_event, dom):
+    dutytypes = Dutytype.query.all()
+    dt_len = len(dutytypes)
+    duty_persons_empty = dict()
+    for k in range(dt_len-1):
+        duty_persons_empty[k] = '[.......................]'  
+    duty_persons = duty_persons_empty
+    if not duty_event: 
+        return duty_persons_empty
+    for event in range(len(duty_event.all())):
+            dt_id = duty_event[event].duty_type_id
+            print('de={},--{}'.format(duty_event[event],dom))
+            duty_persons[dt_id-1] = (Person.query.filter_by(id=duty_event[event].duty_person_id))[0].username
+            
+    try:
+        return duty_persons
+    except IndexError:
+        return duty_persons_empty

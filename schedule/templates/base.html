@@ -13,22 +13,13 @@
       a:hover {
           text-decoration: none;
       }
-      .container-flex {
-        display: flex;
-        flex-direction: row;
-        align-items: stretch;
-        width: 900px; 
-        height: 300px;
-        padding: 50px;
-        margin: auto;
-        justify-content: flex-end
-      } 
     </style>
 
     <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='popper.min.js') }}" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='dd2b335778.js') }}"></script>
+
     <script>
       $(function () {
         $('#myTab li:last-child a').tab('show')
@@ -36,9 +27,9 @@
     </script>
     <script>
     $(function() {
-      var btn = $("[href='#collapseExample']");
-      btn.on("click", function() {
-            btn.text("...");
+      // var btn = $("[href='#collapseExample']");
+      // btn.on("click", function() {
+            // btn.text("...");
       });
     });
     </script>
@@ -62,9 +53,9 @@
             </a>
             </li>
             <li class="nav-item">
-            <a class="nav-item nav-link" href="{{ url_for('calendar.smeny') }}">Типы дежурств</a>
+            <a class="nav-item nav-link" href="{{ url_for('calendar.smeny') }}">Смены</a>
             <li class="nav-item">
-              <p><a class="nav-item nav-link" <span style="padding-left: 600px;"> </span> </a> </p>
+              <p><a class="nav-item nav-link" <span style="padding-left: 670px;"> </span> </a> </p>
               {% if not current_user.is_authenticated %}
               <li class="nav-item">
                 <a class="nav-item nav-link" href="{{ url_for('user.login') }}"> <span style="color:#377ba8;">Log in</span></a>
@@ -89,12 +80,6 @@
     {% endwith %}
     <div id="content">
          {% block content %}{% endblock %}
-    </div>
-    <div id="footer">
-        {% block footer %}
-           <h1></h1>
-           &copy; Learn Python by Moscow.Python 2019 <a href="https://learn.python.ru/"></a>
-        {% endblock %}
-    </div>    
+    </div>  
   </body>
 </html>

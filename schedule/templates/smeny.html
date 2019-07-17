@@ -2,38 +2,53 @@
 {% block title %}{{ title }}{% endblock %}
 {% block head %}
     {{ super() }}
-    <style type="text/css">
-        .important { color: #336699; }
-        /* .equalDivide tr td { width:25%; } */
-    </style>
 {% endblock head %}
 {% block content %}
-    <p class="important">
-    <h5></h5>
-    <div class="container">
-            <table class="table-striped">
-              <!-- <thead> -->
-                <!-- <tr> -->
-                  <!-- <th>Duty type</th> -->
-                  <!-- <th>Time Interval</th> -->
-                <!-- </tr> -->
-              <!-- </thead> -->
-              <tbody>
-                {% for n in range(itslen) %}
-                    <tr class="table-{{ COLOR_ROW[n] }}" >
-                      <td><button type="button" class ="btn btn-primary btn-block text-left btn-{{ COLOR_BTN[n] }}"> 
-                            {{ (timeintervals[n].duty_type | replace('[', '') | replace(']','')) }} 
-                          </button>
-                      </td>
-                      <td> 
-                            {{ timeintervals[n].time_start.strftime('%H:%M') }} - {{timeintervals[n].time_end.strftime('%H:%M')}}
-                      </td>
-                    </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>     
-     </p>
-     <a data-toggle='collapse' href='#collapseExample' id='#collapseExample' class='text-center btn btn-default'>Read More</a>
+<div class="row">
+    <div class="col-4">
+        <table class="table">
+          <tbody>
+            {% for n in range(itslen) %}
+                <tr class="table-{{ COLOR_ROW[n] }}" >
+                  <td><button type="button" data-toggle="collapse" data-target="#collapseExample{{n}}"  aria-expanded="false" aria-controls="collapseExample{{n}}" class ="btn btn-primary btn-block text-left btn-{{ COLOR_BTN[n] }}"> 
+                          {{ (timeintervals[n].duty_type | replace('[', '') | replace(']','')) }} 
+                      </button>
+                  </td>
+                  <td> 
+                        {{ timeintervals[n].time_start.strftime('%H:%M') }} - {{timeintervals[n].time_end.strftime('%H:%M')}}
+                  </td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <br>
+        <div class="container_smen">
+                <div class="collapse" id="collapseExample0">
+                  <div class="card card-body1">
+                    Основной дежурный, 1 смена.
+                  </div>
+                </div>
+                <div class="collapse" id="collapseExample1">
+                    <div class="card card-body2">
+                      Основной дежурный, 2 смена.
+                    </div>
+                </div>
+                <div class="collapse" id="collapseExample2">
+                    <div class="card card-body3">
+                      Старший дежурный, помогает основному дежурному - решает задачи, эскалированные основным дежурным. Координирует взаимодействие при аварийных ситуациях.
+                    </div>
+                </div>
+                <div class="collapse" id="collapseExample3">
+                    <div class="card card-body4">
+                      Дежурный по таскам на сетевые доступы. 
+                    </div>
+                </div>
+         </div>    
+         <div id="footer">
+            {% block footer %}
+               <h1></h1>
+               &copy; Learn Python by Moscow.Python 2019 <a href="https://learn.python.ru/"></a>
+            {% endblock %}
+        </div>  
 {% endblock content %}
 

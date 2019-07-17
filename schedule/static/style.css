@@ -127,6 +127,23 @@ nav ul li a, nav ul li span, header .action {
   margin-bottom: 1em;
 }
 
+.container_smen {
+  display: absolution; 
+  width: 900px; 
+  height: 340px;
+  padding: 5px; 
+
+.container-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 900px; 
+  height: 300px;
+  padding: 50px;
+  margin: auto;
+  justify-content: flex-end
+} 
+
 .content textarea {
   min-height: 12em;
   resize: vertical;

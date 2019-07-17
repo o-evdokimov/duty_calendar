@@ -596,6 +596,7 @@ pre code {
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+  padding: 10px
 }
 
 .row-my {
@@ -1872,6 +1873,25 @@ pre code {
   border: 0;
 }
 
+.table-curved {
+    border-collapse: separate;
+}
+.table-curved {
+    border: solid #ccc 1px;
+    /* border-radius: 20px; */
+}
+.table-curved td, .table-curved th {
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    /* border-radius: 20px; */
+}
+.table-curved tr > *:first-child {
+    border-left: 0px;
+}
+.table-curved tr:first-child > * {
+    border-top: 0px;
+}
+
 .form-control {
   display: block;
   width: 100%;
@@ -2408,7 +2428,8 @@ textarea.form-control {
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.2;
-  border-radius: 0.2rem;
+  /* border-radius: 0.2rem; */
+  border-radius: 20px; */
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -4568,7 +4589,7 @@ input[type="button"].btn-block {
 }
 
 .card {
-  position: relative;
+  position: relative; 
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
@@ -4601,6 +4622,32 @@ input[type="button"].btn-block {
   flex: 1 1 auto;
   padding: 1.25rem;
 }
+
+.card-body1 {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.25rem;
+  background-color: #bee5eb;
+}
+.card-body2 {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.25rem;
+  background-color: #ffeeba;
+}
+.card-body3 {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.25rem;
+  background-color: #c3e6cb;
+}
+.card-body4 {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.25rem;
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
 
 .card-title {
   margin-bottom: 0.75rem;
@@ -4667,6 +4714,8 @@ input[type="button"].btn-block {
   bottom: 0;
   left: 0;
   padding: 1.25rem;
+  margin-right: -0.625rem;
+  margin-left: -0.625rem;
 }
 
 .card-img {

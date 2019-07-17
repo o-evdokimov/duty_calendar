@@ -7,8 +7,9 @@ db = SQLAlchemy()
  
 class Timeinterval(db.Model):
     id = db.Column(db.Integer, primary_key=True) 
-    time_start = db.Column(db.DateTime, nullable=False) 
-    time_end = db.Column(db.DateTime, nullable=False) 
+    time_start = db.Column(db.Time, nullable=False) 
+    time_end = db.Column(db.Time, nullable=False) 
+    time_end2 = db.Column(db.Time, nullable=True)
     duty_type = db.relationship('Dutytype', backref='timeinterval', lazy=True)
 
     def __init__(self, time_start, time_end):

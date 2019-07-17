@@ -33,7 +33,19 @@
       });
     });
     </script>
-
+<script type=text/javascript>
+    $(function() {
+      $(".dropdown-menu li a").click(function(){
+        $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+        $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+        $("button").width("89px");
+        $.getJSON(write_dutyevent,
+                function(data) {
+              //do nothing
+            });
+      });
+    });
+</script>
     <title>{% block title %}{% endblock %} </title>
 </head>
 <body>      

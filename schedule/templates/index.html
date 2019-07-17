@@ -52,18 +52,22 @@
                             <tr> <th class=text-center> {{ day_of_month }} </th></tr>
                         </thead>
                         <tbody>
-                            {% set duty_persons = (de_day[day_of_month])|get_duty_person %}
+                            {% set duty_persons = (de_day[day_of_month])|get_event_duty_person %}
                             {% for n in range(dutytype_number-1) %}
+                                {% set person = n|get_role_duty_person %}
                                 <tr class="table-{{ COLOR_ROW[n] }}" >
                                     <td>
-                                        <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class ="btn btn-primary btn-block text-left btn-{{ COLOR_BTN[n] }}"> 
+                                    <div class="dropdown">
+                                        <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class ="btn btn-primary btn-block text-left btn-{{ COLOR_BTN[n] }}"> 
                                             {{ (duty_persons[n])|capitalize }} 
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            {% for n in range(4) %}
-                                                <a class="dropdown-item" href="{{ url_for('calendar.index',year=YEAR,month=n) }}"></a>
+                                       
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            {% for p in range(person|length) %}
+                                                <li><a href="#" data-value="action">{{person[p]|capitalize}}</li></a>
                                             {% endfor %} 
-                                        </div>
+                                        </ul>
+                                    </div>
                                     </td>
                                 </tr>
                             {% endfor %}

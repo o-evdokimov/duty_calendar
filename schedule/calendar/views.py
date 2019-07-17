@@ -5,7 +5,7 @@ from calendar import monthrange
 import calendar
 
 
-from schedule.calendar.models import Dutytype, Dutyevent, Timeinterval
+from schedule.calendar.models import Dutytype, Dutyevent, Timeinterval, Role
 from schedule.user.models import Person
 
 
@@ -74,13 +74,13 @@ def smeny():
 
 # получаем словарь (dict) с persons, номер ячейки соответствует dutytype_id
 # данный template используем в calendar.index
-@blueprint.app_template_filter('get_duty_person')
-def get_duty_person(duty_event):
+@blueprint.app_template_filter('get_event_duty_person')
+def get_event_duty_person(duty_event):
     dutytypes = Dutytype.query.all()
     dt_len = len(dutytypes)
     duty_persons_empty = dict()
     for k in range(dt_len-1):
-        duty_persons_empty[k] = '[.......................]'  
+        duty_persons_empty[k] = '.......................'  
     duty_persons = duty_persons_empty
     if not duty_event: 
         return duty_persons_empty
@@ -92,3 +92,26 @@ def get_duty_person(duty_event):
         return duty_persons
     except IndexError:
         return duty_persons_empty
+
+@blueprint.app_template_filter('get_role_duty_person')
+def get_role_duty_person(n):
+    role = Dutytype.query.filter_by(id=n+1)[0].role_id
+    persons = Role.query.get(role).users
+    return list(set(persons))
+
+@blueprint.app_template_filter('get_dutytype_name')
+def get_dutytype_name(n):
+    return Dutytype.query.filter_by(time_interval_id=n+1)[0].name
+
+
+@blueprint.app_context_processor
+def  write_dutyevent():
+   print('yes')
+   return dict(write_dutyevent=777)
+
+
+@blueprint.route('/background_process_test')
+def background_process_test():
+    print ("Hello")
+    return "nothing"
+

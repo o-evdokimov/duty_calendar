@@ -22,6 +22,7 @@ class Role(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     duty_type = db.relationship('Dutytype', backref='role', lazy=True)
+    users = db.relationship("Person", secondary = 'roleperson', back_populates='duty_roles')
     def __repr__(self):
         return ("Role: {}".format(self.name), self.duty_type)
 
@@ -31,7 +32,7 @@ class Dutytype(db.Model):
     time_interval_id = db.Column(db.Integer, db.ForeignKey('timeinterval.id'))
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
     def __repr__(self):
-        return ("{}".format(self.name))
+        return ("{}".format(self.id))
     def __init__(self, name, time_interval_id, role_id):
         self.name = name
         self.time_interval_id = time_interval_id
@@ -43,6 +44,8 @@ class Roleperson(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
     person_id = db.Column(db.Integer, db.ForeignKey('person.id'))
+    #role_id = db.Column(db.Integer, db.ForeignKey('role.id'), primary_key = True)
+    #person_id = db.Column(db.Integer, db.ForeignKey('person.id'), primary_key = True)
 
     def __init__(self, *args, **kwargs):
         super(Roleperson,self).__init__(*args, **kwargs)

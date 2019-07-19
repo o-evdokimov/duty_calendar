@@ -1,9 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
+#from schedule.user.models import db
+from schedule.database import db
 from datetime import datetime
-#from schedule.user.models import Person 
+from schedule.user.models import Person 
 
 
-db = SQLAlchemy()
+#db = SQLAlchemy()
  
 class Timeinterval(db.Model):
     id = db.Column(db.Integer, primary_key=True) 
@@ -54,6 +56,7 @@ class Dutyevent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     duty_type_id = db.Column(db.Integer, db.ForeignKey('dutytype.id'), default=0)
     duty_person_id = db.Column(db.Integer, db.ForeignKey('person.id'), default=0)
+    duty_person = db.Column(db.String, nullable=False)
     date_time_start = db.Column(db.DateTime, default = datetime.today().strftime('%Y-%m-%d'), nullable=False) 
     date_time_stop = db.Column(db.DateTime, default = datetime.today().strftime('%Y-%m-%d'), nullable=False)
     date_ym = db.Column(db.String, default = datetime.today().strftime('%Y-%m'), nullable=False) 
@@ -64,10 +67,14 @@ class Dutyevent(db.Model):
     # @property
     def create_ym(self):
         return self.table_date.strftime('%Y-%m')
+    def get_person(self):
+        return Person.query.filter_by(id=self.duty_person_id)[0]
     # @property
     def create_ymd(self):
         return self.table_date.strftime('%Y-%m-%d')
-    def __init__(self,table_date=table_date):
+    def __init__(self, duty_person_id = duty_person_id, table_date=table_date):
+        self.duty_person_id = duty_person_id
+        self.duty_person = self.get_person()
         self.table_date = table_date
         self.date_ym = self.create_ym()
         self.date_ymd = self.create_ymd()

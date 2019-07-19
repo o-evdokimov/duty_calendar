@@ -13,15 +13,6 @@ from schedule.database import db
 
 blueprint = Blueprint('calendar', __name__, url_prefix='/calendar')
 
-#def InitCalendar(mcal, persons, dutytypes):
-#    pass
-
-#def EmptyDay(day_date):
-    #table_date = datetime.strptime(day_date, '%Y-%m-%d')
-    #de = Dutyevent(table_date=table_date)
-    #return de
-
-
 @blueprint.route('/')
 def index_default():
     year = int(datetime.today().strftime('%Y'))
@@ -44,7 +35,7 @@ def push_calendar(pool_persons, days_number, year, month):
             de=1
     return False
 
-@blueprint.route('/<int:year>/<int:month>/fill')
+@blueprint.route('fill/<int:year>/<int:month>')
 def fill(year,month):
      title = "Заполнение"
      persons = db.session.query(Person.id).filter_by(role='user')
@@ -72,7 +63,6 @@ def index(year,month):
     cal = calendar.Calendar()
     mcal = cal.monthdays2calendar(year,month)
     week_numbers = len(mcal)
-    #InitCalendar(mcal,persons,dutytypes)
 
     # получаем словарь с dutyevents и отдаём его в calendar.index
     # ключ = день, значение = список объектов класса Dutyevent
@@ -81,9 +71,7 @@ def index(year,month):
         if not x[0]: continue
         day = x[0]
         day_date = (datetime.strptime('{}-{}-{}'.format(year,month,str(day)),'%Y-%m-%d')).strftime('%Y-%m-%d')
-        #day_date = '2019-07-14'
         de_day[day] = Dutyevent.query.filter_by(date_ymd = day_date)
-        #if not de_day[day].all(): de_day[day] = EmptyDay(day_date)
 
     return render_template('index.html', title = title, week_numbers=week_numbers, mcal = mcal, de_day = de_day, mydate=mydate, dutytype_number = dutytype_number, first_day = first_day)
 
@@ -130,11 +118,19 @@ def get_role_duty_person(n):
 def get_dutytype_name(n):
     return Dutytype.query.filter_by(time_interval_id=n+1)[0].name
 
+@blueprint.app_template_filter('current_month')
+def current_month(m):
+    month = int(datetime.today().strftime('%m'))
+    return month
+@blueprint.app_template_filter('current_year')
+def current_year(y):
+    year = int(datetime.today().strftime('%Y'))
+    return year
 
-@blueprint.app_context_processor
-def  write_dutyevent():
-   print('yes')
-   return dict(write_dutyevent=777)
+#@blueprint.app_context_processor
+#def  write_dutyevent():
+#   print('yes')
+#   return dict(write_dutyevent=777)
 
 
 @blueprint.route('/background_process_test')

@@ -6,7 +6,8 @@ from datetime import datetime
 
 from schedule.database import db
 from schedule.user.views import blueprint as user_blueprint
-from schedule.calendar.models import Role, Dutytype, Dutyevent, Testdutyevent, Timeinterval, Roleperson, Person
+from schedule.calendar.models import Role, Dutytype, Dutyevent, Testdutyevent, Timeinterval, Roleperson
+from schedule.user.models import Person
 from schedule.calendar.views import blueprint as calendar_blueprint
 
 

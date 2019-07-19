@@ -3,10 +3,12 @@ from flask import Blueprint, render_template, flash, redirect, url_for
 from datetime import datetime
 from calendar import monthrange
 import calendar
+from itertools import cycle, chain
 
 
 from schedule.calendar.models import Dutytype, Dutyevent, Timeinterval, Role
 from schedule.user.models import Person
+from schedule.database import db
 
 
 blueprint = Blueprint('calendar', __name__, url_prefix='/calendar')
@@ -26,11 +28,34 @@ def index_default():
     month = int(datetime.today().strftime('%m'))
     return redirect(url_for('calendar.index',year=year,month=month))
 
+
+def push_calendar(pool_persons, days_number, year, month):
+    day=1
+    de=1
+    for user_id in pool_persons:
+        if day > days_number:
+            return True
+        mydate = datetime.strptime('{}-{}-{}'.format(year,month,day), "%Y-%m-%d")
+        db.session.add(Dutyevent(de, user_id[0], mydate))
+        db.session.commit()
+        de+=1
+        if de>4: 
+            day+=1
+            de=1
+    return False
+
+@blueprint.route('/<int:year>/<int:month>/fill')
+def fill(year,month):
+     title = "Заполнение"
+     persons = db.session.query(Person.id).filter_by(role='user')
+     pool_persons = cycle(persons.all())
+     days_number = calendar.monthrange(year,month)[1]
+     push_calendar(pool_persons, days_number, year, month)
+     return redirect(url_for('calendar.index',year=year,month=month))
+
 @blueprint.route('/<int:year>/<int:month>')
 def index(year,month):
     title = "Расписание"
-    dutytypes = Dutytype.query.all()
-    dutytype_number = len(dutytypes)
     if (month < 1): 
         month=12
         year-=1
@@ -39,6 +64,9 @@ def index(year,month):
         month=1
         year+=1
         return redirect(url_for('calendar.index',year=year,month=month)) 
+    
+    dutytypes = Dutytype.query.all()
+    dutytype_number = len(dutytypes)
     mydate = datetime.strptime('{},{}'.format(year,month), '%Y,%m')
     first_day = monthrange(year,month)[0]
     cal = calendar.Calendar()
@@ -65,7 +93,6 @@ def smeny():
         title = "Смены дежурств"
         timeintervals = Timeinterval.query.all()
         itslen = len(timeintervals)
-        print('len=',type(itslen))
         return render_template('smeny.html', title = title, timeintervals = timeintervals, itslen = itslen)
     else:
         flash('Log in for access', 'alert-info')

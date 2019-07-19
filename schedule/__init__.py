@@ -6,7 +6,7 @@ from datetime import datetime
 
 from schedule.database import db
 from schedule.user.views import blueprint as user_blueprint
-from schedule.calendar.models import Role, Dutytype, Dutyevent, Timeinterval, Roleperson, Person
+from schedule.calendar.models import Role, Dutytype, Dutyevent, Testdutyevent, Timeinterval, Roleperson, Person
 from schedule.calendar.views import blueprint as calendar_blueprint
 
 
@@ -37,7 +37,7 @@ def create_app():
 
     @app.shell_context_processor
     def make_shell_context():
-        return {'db':db, 'Person':Person, 'Role':Role, 'Dutytype':Dutytype, 'Dutyevent':Dutyevent, 'Timeinterval':Timeinterval, 'Roleperson':Roleperson}
+        return {'db':db, 'Person':Person, 'Role':Role, 'Dutytype':Dutytype, 'Dutyevent':Dutyevent, 'Testdutyevent':Testdutyevent, 'Timeinterval':Timeinterval, 'Roleperson':Roleperson}
 
     return app
 

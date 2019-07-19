@@ -4,11 +4,9 @@ from flask.views import MethodView
 from flask_migrate import Migrate
 from datetime import datetime
 
-
-from schedule.user.models import Person
-from schedule.user.views import blueprint as user_blueprint
 from schedule.database import db
-from schedule.calendar.models import Role, Dutytype, Dutyevent, Timeinterval, Roleperson
+from schedule.user.views import blueprint as user_blueprint
+from schedule.calendar.models import Role, Dutytype, Dutyevent, Timeinterval, Roleperson, Person
 from schedule.calendar.views import blueprint as calendar_blueprint
 
 

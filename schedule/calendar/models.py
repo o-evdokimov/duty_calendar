@@ -56,7 +56,7 @@ class Dutyevent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     duty_type_id = db.Column(db.Integer, db.ForeignKey('dutytype.id'), default=0)
     duty_person_id = db.Column(db.Integer, db.ForeignKey('person.id'), default=0)
-    duty_person = db.Column(db.String, nullable=False)
+    duty_person = db.Column(db.String, nullable=True)
     date_time_start = db.Column(db.DateTime, default = datetime.today().strftime('%Y-%m-%d'), nullable=False) 
     date_time_stop = db.Column(db.DateTime, default = datetime.today().strftime('%Y-%m-%d'), nullable=False)
     date_ym = db.Column(db.String, default = datetime.today().strftime('%Y-%m'), nullable=False) 

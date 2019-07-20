@@ -3,6 +3,32 @@
 {% block head %}
     {{ super() }}  
 {% endblock head %}
+{% block menu %}
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Расписание
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ url_for('calendar.index_default') }}">Календарь</a>
+                    <a class="dropdown-item" href="{{ url_for('calendar.fill',year=YEAR,month=MONTH) }}">Заполнить</a>
+                  </div>
+                </li>
+            <li class="nav-item">
+              <a class="nav-item nav-link" href="{{ url_for('calendar.smeny') }}">Смены</a>
+              </li>
+            <li class="nav-item">
+              <p><a class="nav-item nav-link" <span style="padding-left: 650px;"> </span> </a> </p>
+              {% if not current_user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-item nav-link" href="{{ url_for('user.login') }}"> <span style="color:#377ba8;">Log in</span></a>
+              </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-item nav-link" href="{{ url_for('user.logout') }}">  <span style="color:#377ba8;">Log out</span></a>
+                </li>
+            {% endif %}
+            </li>
+{% endblock menu %}
 {% block content %}
     {% set WEEKDAYS = {0:'Monday',1:'Tuesday',2:'Wednesday',3:'Thursday',4:'Friday',5:'Saturday',6:'Sunday'} %}
     {% set ROWS = week_numbers %}

@@ -25,19 +25,19 @@
         $('#myTab li:last-child a').tab('show')
       })
     </script>
-<script type=text/javascript>
-    $(function() {
-      $(".dropdown-menu li a").click(function(){
-        $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
-        $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-        $("button").width("89px");
-        //$.getJSON(write_dutyevent,
-        //        function(data) {
-              //do nothing
-         //   });
-      });
-    });
-</script>
+    <script type=text/javascript>
+        $(function() {
+          $(".dropdown-menu li a").click(function(){
+            $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+            $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+            $("button").width("89px");
+            //$.getJSON(write_dutyevent,
+            //        function(data) {
+                  //do nothing
+            //   });
+          });
+        });
+    </script>
     <title>{% block title %}{% endblock %} </title>
 </head>
 <body>      
@@ -46,39 +46,17 @@
     {% set YEAR = mydate.strftime('%Y') %}
     {% set MONTH = mydate.strftime('%m') %} 
     <!-- <nav class="navbar navbar-dark bg-dark"> -->
-    <nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light"> 
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light"> </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Расписание
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ url_for('calendar.index_default') }}">Календарь</a>
-                    <a class="dropdown-item" href="{{ url_for('calendar.fill',year=YEAR,month=MONTH) }}">Заполнить</a>
-                  </div>
-                </li>
-            <li class="nav-item">
-              <a class="nav-item nav-link" href="{{ url_for('calendar.smeny') }}">Смены</a>
-              </li>
-            <li class="nav-item">
-              <p><a class="nav-item nav-link" <span style="padding-left: 500px;"> </span> </a> </p>
-              {% if not current_user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-item nav-link" href="{{ url_for('user.login') }}"> <span style="color:#377ba8;">Log in</span></a>
-              </li>
-              {% else %}
-                <li class="nav-item">
-                  <a class="nav-item nav-link" href="{{ url_for('user.logout') }}">  <span style="color:#377ba8;">Log out</span></a>
-                </li>
-            {% endif %}
-            </li>
+              {% block menu%}
+              {% endblock menu%}
+            </div>
           </div>
-        </div>
-    </nav>
+      </nav>
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, message in messages %}

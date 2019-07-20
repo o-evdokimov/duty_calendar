@@ -14,7 +14,10 @@ def login():
         return redirect(url_for('index'))
     title = "Авторизация"
     login_form = LoginForm()
-    return render_template('login.html', title = title, form=login_form)
+    year=2019
+    month=7
+    mydate = datetime.strptime('{},{}'.format(year,month), '%Y,%m')
+    return render_template('login.html', mydate=mydate, title = title, form=login_form)
 
 @blueprint.route('/logout')
 def logout():
@@ -36,7 +39,7 @@ def process_login():
             flash('You are logged in as '+user.username, 'alert-secondary')
             year = int(datetime.today().strftime('%Y'))
             month = int(datetime.today().strftime('%m'))
-            return redirect(url_for('calendar.index',year=2019,month=1))
+            return redirect(url_for('calendar.index',year=year,month=month))
 
     flash('Username or Password are invalid', 'alert-danger')
     return redirect(url_for('user.login'))

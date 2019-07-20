@@ -81,7 +81,10 @@ def smeny():
         title = "Смены дежурств"
         timeintervals = Timeinterval.query.all()
         itslen = len(timeintervals)
-        return render_template('smeny.html', title = title, timeintervals = timeintervals, itslen = itslen)
+        year=2019
+        month=7
+        mydate = datetime.strptime('{},{}'.format(year,month), '%Y,%m')
+        return render_template('smeny.html', title = title, timeintervals = timeintervals, itslen = itslen, mydate=mydate)
     else:
         flash('Log in for access', 'alert-info')
         return redirect(url_for('user.login'))

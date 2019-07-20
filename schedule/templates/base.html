@@ -44,7 +44,7 @@
     {% set COLOR_BTN = ['primary', 'warning', 'success', 'secondary'] %}
     {% set COLOR_ROW = ['info', 'warning', 'success', 'active'] %} 
     {% set YEAR = mydate.strftime('%Y') %}
-    {% set MONTH = mydate.strftime('%m') %}
+    {% set MONTH = mydate.strftime('%m') %} 
     <!-- <nav class="navbar navbar-dark bg-dark"> -->
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light"> 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,7 @@
               <a class="nav-item nav-link" href="{{ url_for('calendar.fill',year=YEAR,month=MONTH) }}">Заполнить</a>
             </li>
             <li class="nav-item">
-              <p><a class="nav-item nav-link" <span style="padding-left: 670px;"> </span> </a> </p>
+              <p><a class="nav-item nav-link" <span style="padding-left: 500px;"> </span> </a> </p>
               {% if not current_user.is_authenticated %}
               <li class="nav-item">
                 <a class="nav-item nav-link" href="{{ url_for('user.login') }}"> <span style="color:#377ba8;">Log in</span></a>

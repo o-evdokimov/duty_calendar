@@ -31,6 +31,14 @@
             $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
             $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
             $("button").width("89px");
+            var personValue = $(this).parents(".dropdown").find('.btn').val($(this).data('value'))
+            var myurl = "/calendar/test?action="+ $(this).text()+$(this).data('value')
+            $.ajax({
+              type: "POST",
+              url: myurl,
+              data: personValue
+            });
+
             //$.getJSON(write_dutyevent,
             //        function(data) {
                   //do nothing

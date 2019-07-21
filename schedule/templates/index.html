@@ -81,6 +81,7 @@
                             {% set duty_persons = (de_day[day_of_month])|get_event_duty_person %}
                             {% for n in range(dutytype_number-1) %}
                                 {% set person = n|get_role_duty_person %}
+                                {% set arg = "n=" + n|string + "day=" + day_of_month|string %}
                                 <tr class="table-{{ COLOR_ROW[n] }}" >
                                     <td>
                                     <div class="dropdown">
@@ -90,7 +91,7 @@
                                        
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             {% for p in range(person|length) %}
-                                                <li><a href="#" data-value="action">{{person[p]|capitalize}}</li></a>
+                                                <li><a href="#" data-value={{arg}}>{{person[p]|capitalize}}</li></a>
                                             {% endfor %} 
                                         </ul>
                                     </div>

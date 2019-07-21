@@ -141,3 +141,9 @@ def background_process_test():
     print ("Hello")
     return "nothing"
 
+
+@blueprint.route('/test', methods=['GET', 'POST'])
+def test():
+    print('test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    return "True"
+    

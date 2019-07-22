@@ -1,5 +1,5 @@
 from flask_login import current_user
-from flask import Blueprint, render_template, flash, redirect, url_for
+from flask import Blueprint, render_template, flash, redirect, url_for, request
 from datetime import datetime
 from calendar import monthrange
 import calendar
@@ -20,7 +20,7 @@ def index_default():
     return redirect(url_for('calendar.index',year=year,month=month))
 
 
-def push_calendar(pool_persons, days_number, year, month):
+def push_calendar_month(pool_persons, days_number, year, month):
     day=1
     de=1
     for user_id in pool_persons:
@@ -41,7 +41,7 @@ def fill(year,month):
      persons = db.session.query(Person.id).filter_by(role='user')
      pool_persons = cycle(persons.all())
      days_number = calendar.monthrange(year,month)[1]
-     push_calendar(pool_persons, days_number, year, month)
+     push_calendar_month(pool_persons, days_number, year, month)
      return redirect(url_for('calendar.index',year=year,month=month))
 
 @blueprint.route('/<int:year>/<int:month>')
@@ -142,8 +142,19 @@ def background_process_test():
     return "nothing"
 
 
-@blueprint.route('/test', methods=['GET', 'POST'])
-def test():
-    print('test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    return "True"
+def push_calendar_event(de, person_id, day, month, year):
+    mydate = datetime.strptime('{}-{}-{}'.format(year,month,day), "%Y-%m-%d")
+    db.session.add(Dutyevent(de, person_id, mydate))
+    db.session.commit()
+
+@blueprint.route('/change', methods=['GET', 'POST'])
+def change():
+    de = request.args['de']
+    person = request.args['person'].lower()
+    day = request.args['day']
+    month = request.args['m']
+    year = request.args['y']
+    person_id = Person.query.filter_by(username=person)[0].id
+    push_calendar_event(de, person_id, day, month, year)
+    return redirect(url_for('calendar.index',year=year,month=month))
     

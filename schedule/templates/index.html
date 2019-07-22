@@ -81,7 +81,7 @@
                             {% set duty_persons = (de_day[day_of_month])|get_event_duty_person %}
                             {% for n in range(dutytype_number-1) %}
                                 {% set person = n|get_role_duty_person %}
-                                {% set arg = "n=" + n|string + "day=" + day_of_month|string %}
+                                {% set arg = "de=" + n|string + "&" + "day=" + day_of_month|string  + "&" +  "m=" + MONTH + "&" + "y=" + YEAR %}
                                 <tr class="table-{{ COLOR_ROW[n] }}" >
                                     <td>
                                     <div class="dropdown">

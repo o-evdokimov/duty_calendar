@@ -32,7 +32,7 @@
             $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
             $("button").width("89px");
             var personValue = $(this).parents(".dropdown").find('.btn').val($(this).data('value'))
-            var myurl = "/calendar/test?action="+ $(this).text()+$(this).data('value')
+            var myurl = "/calendar/change?person="+ $(this).text()+"&"+$(this).data('value')
             $.ajax({
               type: "POST",
               url: myurl,

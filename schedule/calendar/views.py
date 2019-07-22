@@ -142,19 +142,27 @@ def background_process_test():
     return "nothing"
 
 
-def push_calendar_event(de, person_id, day, month, year):
+def push_calendar_event(duty_type_id, person_id, day, month, year):
     mydate = datetime.strptime('{}-{}-{}'.format(year,month,day), "%Y-%m-%d")
-    db.session.add(Dutyevent(de, person_id, mydate))
+    date_ymd = mydate.strftime('%Y-%m-%d')
+    # найти и удалить все записи с de
+    print('dt:',duty_type_id,'p:',person_id,'date:',date_ymd)
+    de = db.session.query(Dutyevent).filter(Dutyevent.duty_type_id==duty_type_id, Dutyevent.date_ymd==date_ymd).first()
+    db.session.delete(de)
+    #db.session.commit()
+    # [Duty event: 375]
+    db.session.add(Dutyevent(duty_type_id, person_id, mydate))
     db.session.commit()
 
 @blueprint.route('/change', methods=['GET', 'POST'])
 def change():
-    de = request.args['de']
+    de = int(request.args['de'])
+    #print(type(de),' is ',de)
     person = request.args['person'].lower()
-    day = request.args['day']
-    month = request.args['m']
-    year = request.args['y']
+    day = int(request.args['day'])
+    month = int(request.args['m'])
+    year = int(request.args['y'])
     person_id = Person.query.filter_by(username=person)[0].id
-    push_calendar_event(de, person_id, day, month, year)
+    push_calendar_event(de+1, person_id, day, month, year)
     return redirect(url_for('calendar.index',year=year,month=month))
     

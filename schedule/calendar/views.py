@@ -144,6 +144,10 @@ def background_process_test():
 
 def push_calendar_event(de, person_id, day, month, year):
     mydate = datetime.strptime('{}-{}-{}'.format(year,month,day), "%Y-%m-%d")
+    # найти и удалить все записи с de
+    # db.session.delete
+    # db.session.query(Dutyevent).filter(Dutyevent.duty_person_id==5, Dutyevent.duty_type_id==4, Dutyevent.date_ymd=='2019-07-31').first()
+    # [Duty event: 375]
     db.session.add(Dutyevent(de, person_id, mydate))
     db.session.commit()
 

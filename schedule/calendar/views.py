@@ -149,7 +149,6 @@ def push_calendar_event(duty_type_id, person_id, day, month, year):
     print('dt:',duty_type_id,'p:',person_id,'date:',date_ymd)
     de = db.session.query(Dutyevent).filter(Dutyevent.duty_type_id==duty_type_id, Dutyevent.date_ymd==date_ymd).first()
     db.session.delete(de)
-    #db.session.commit()
     # [Duty event: 375]
     db.session.add(Dutyevent(duty_type_id, person_id, mydate))
     db.session.commit()
@@ -157,7 +156,6 @@ def push_calendar_event(duty_type_id, person_id, day, month, year):
 @blueprint.route('/change', methods=['GET', 'POST'])
 def change():
     de = int(request.args['de'])
-    #print(type(de),' is ',de)
     person = request.args['person'].lower()
     day = int(request.args['day'])
     month = int(request.args['m'])

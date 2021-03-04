@@ -1,5 +1,6 @@
 from flask_login import login_user, logout_user, current_user
 from flask import Blueprint, render_template, flash, redirect, url_for
+from datetime import datetime
 
 
 from schedule.user.forms import LoginForm
@@ -13,7 +14,10 @@ def login():
         return redirect(url_for('index'))
     title = "Авторизация"
     login_form = LoginForm()
-    return render_template('login.html', title = title, form=login_form)
+    year=2019
+    month=7
+    mydate = datetime.strptime('{},{}'.format(year,month), '%Y,%m')
+    return render_template('login.html', mydate=mydate, title = title, form=login_form)
 
 @blueprint.route('/logout')
 def logout():
@@ -33,7 +37,9 @@ def process_login():
         if user and user.check_password(form.password.data):
             login_user(user)
             flash('You are logged in as '+user.username, 'alert-secondary')
-            return redirect(url_for('calendar.index',year_=2019,month_=1))
+            year = int(datetime.today().strftime('%Y'))
+            month = int(datetime.today().strftime('%m'))
+            return redirect(url_for('calendar.index',year=year,month=month))
 
     flash('Username or Password are invalid', 'alert-danger')
     return redirect(url_for('user.login'))

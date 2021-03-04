@@ -4,18 +4,16 @@ from flask.views import MethodView
 from flask_migrate import Migrate
 from datetime import datetime
 
-
-from schedule.user.models import Person
+from schedule.database import db
 from schedule.user.views import blueprint as user_blueprint
-from schedule.calendar.models import db
-from schedule.calendar.models import Role, Dutytype, Timeinterval, Roleperson
+from schedule.calendar.models import Role, Dutytype, Dutyevent, Testdutyevent, Timeinterval, Roleperson
+from schedule.user.models import Person
 from schedule.calendar.views import blueprint as calendar_blueprint
 
 
 def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('config.py')
-    app.config.from_pyfile('config_local.py')
     db.init_app(app)
     migrate = Migrate(app, db)
 
@@ -32,7 +30,7 @@ def create_app():
         current_date = datetime.today()
         year = int(current_date.strftime('%Y'))
         month = int(current_date.strftime('%m'))
-        return redirect(url_for('calendar.index',year_=year,month_=month)) 
+        return redirect(url_for('calendar.index',year=year,month=month)) 
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -40,7 +38,7 @@ def create_app():
 
     @app.shell_context_processor
     def make_shell_context():
-        return {'db':db, 'Person':Person, 'Role':Role, 'Dutytype':Dutytype, 'Timeinterval':Timeinterval, 'Roleperson':Roleperson}
+        return {'db':db, 'Person':Person, 'Role':Role, 'Dutytype':Dutytype, 'Dutyevent':Dutyevent, 'Testdutyevent':Testdutyevent, 'Timeinterval':Timeinterval, 'Roleperson':Roleperson}
 
     return app
 
